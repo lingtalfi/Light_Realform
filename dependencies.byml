@@ -1,0 +1,9 @@
+dependencies: 
+    Ling: 
+        - BabyYaml
+        - Bat
+        - Chloroform
+    
+
+post_install: 
+    map: true

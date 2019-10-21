@@ -1,0 +1,2 @@
+realform:
+    instance: Ling\Light_Realform\Service\LightRealformService
