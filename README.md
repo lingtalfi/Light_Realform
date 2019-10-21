@@ -35,6 +35,7 @@ Summary
     - [Conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes.md)
 
 - [Services](#services)
+- [Related](#related)
 
 
 
@@ -59,11 +60,19 @@ realform:
 
 
 
+Related
+==========
+
+- [Light_Realist](https://github.com/lingtalfi/Light_Realist): a tool to create any list
 
 
 History Log
 =============
 
+- 1.0.1 -- 2019-10-21
+
+    - add related section in README.md
+    
 - 1.0.0 -- 2019-10-21
 
     - initial commit
