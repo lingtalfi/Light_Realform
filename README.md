@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.0.3 -- 2019-10-25
+
+    - update realform configuration example
+    
 - 1.0.2 -- 2019-10-25
 
     - add realform configuration example

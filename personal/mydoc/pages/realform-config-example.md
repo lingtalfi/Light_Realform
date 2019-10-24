@@ -42,6 +42,7 @@ form_handler:
     #                               # - color
     #                               # - csrf (the case is an exception, because cSRF would be impractical)
     #                               # - date
+    #                               # - datetime
     #                               # - file
     #                               # - hidden
     #                               # - number
