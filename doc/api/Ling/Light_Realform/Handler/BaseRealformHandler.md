@@ -4,7 +4,7 @@
 
 The BaseRealformHandler class
 ================
-2019-10-21 --> 2019-10-21
+2019-10-21 --> 2019-10-24
 
 
 
@@ -33,14 +33,14 @@ abstract class <span class="pl-k">BaseRealformHandler</span> implements [Realfor
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/__construct.md)() : void
     - public [setId](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setId.md)(string $id) : mixed
-    - public [getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormHandler.md)() : Ling\Chloroform\Form\Chloroform
+    - public [getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormHandler.md)() : [Chloroform](https://github.com/lingtalfi/Chloroform)
     - public [getConfiguration](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getConfiguration.md)() : array
-    - public [getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getSuccessHandler.md)() : void
-    - public [getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md)() : void
+    - public [getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getSuccessHandler.md)() : [RealformSuccessHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface.md)
+    - public [getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md)() : [RealformRendererInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Renderer/RealformRendererInterface.md)
     - public [setConfDir](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setConfDir.md)(string $confDir) : void
-    - protected [getDefaultFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getDefaultFormHandler.md)() : Ling\Chloroform\Form\Chloroform
-    - protected [getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformField.md)(Ling\Chloroform\Form\Chloroform $form, string $type, string $fieldId, ?array $fieldConf = []) : Ling\Chloroform\Field\FieldInterface
-    - protected [getChloroformValidator](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformValidator.md)(string $type, array $validatorConf) : Ling\Chloroform\Validator\ValidatorInterface
+    - protected [getDefaultFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getDefaultFormHandler.md)() : [Chloroform](https://github.com/lingtalfi/Chloroform)
+    - protected [getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformField.md)([Ling\Chloroform\Form\Chloroform](https://github.com/lingtalfi/Chloroform) $form, string $type, string $fieldId, ?array $fieldConf = []) : [FieldInterface](https://github.com/lingtalfi/Chloroform/blob/master/doc/api/Ling/Chloroform/Field/FieldInterface.md)
+    - protected [getChloroformValidator](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformValidator.md)(string $type, array $validatorConf) : [ValidatorInterface](https://github.com/lingtalfi/Chloroform/blob/master/doc/api/Ling/Chloroform/Validator/ValidatorInterface.md)
 
 }
 
@@ -78,8 +78,8 @@ Methods
 - [BaseRealformHandler::setId](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setId.md) &ndash; Sets the realform id.
 - [BaseRealformHandler::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormHandler.md) &ndash; Returns a chloroform instance configured based on the realform id.
 - [BaseRealformHandler::getConfiguration](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getConfiguration.md) &ndash; Returns the realform configuration based on the realform id.
-- [BaseRealformHandler::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getSuccessHandler.md) &ndash; 
-- [BaseRealformHandler::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md) &ndash; 
+- [BaseRealformHandler::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getSuccessHandler.md) &ndash; Returns the success handler for this instance.
+- [BaseRealformHandler::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md) &ndash; Returns the form renderer for this instance.
 - [BaseRealformHandler::setConfDir](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setConfDir.md) &ndash; Sets the confDir.
 - [BaseRealformHandler::getDefaultFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getDefaultFormHandler.md) &ndash; Returns a default chloroform instance.
 - [BaseRealformHandler::getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformField.md) &ndash; Returns a chloroform field.

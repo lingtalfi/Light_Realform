@@ -7,7 +7,7 @@ BaseRealformHandler::getSuccessHandler
 
 
 
-BaseRealformHandler::getSuccessHandler — 
+BaseRealformHandler::getSuccessHandler — Returns the success handler for this instance.
 
 
 
@@ -16,12 +16,12 @@ Description
 ================
 
 
-public [BaseRealformHandler::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getSuccessHandler.md)() : void
+public [BaseRealformHandler::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getSuccessHandler.md)() : [RealformSuccessHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface.md)
 
 
 
 
-
+Returns the success handler for this instance.
 
 
 
@@ -35,7 +35,7 @@ This method has no parameters.
 Return values
 ================
 
-Returns void.
+Returns [RealformSuccessHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface.md).
 
 
 

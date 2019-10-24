@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [BaseRealformHandler::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormHandler.md)() : Ling\Chloroform\Form\Chloroform
+public [BaseRealformHandler::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormHandler.md)() : [Chloroform](https://github.com/lingtalfi/Chloroform)
 
 
 
@@ -35,7 +35,7 @@ This method has no parameters.
 Return values
 ================
 
-Returns Ling\Chloroform\Form\Chloroform.
+Returns [Chloroform](https://github.com/lingtalfi/Chloroform).
 
 
 Exceptions thrown

@@ -27,7 +27,7 @@ The identifier notation is:
 
 - identifier: {pluginName}.{id}
 
-More info in the conception notes.
+More info in the [conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes.md).
 
 
 

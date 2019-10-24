@@ -1,6 +1,6 @@
 Ling/Light_Realform
 ================
-2019-10-21 --> 2019-10-21
+2019-10-21 --> 2019-10-24
 
 
 
@@ -14,15 +14,15 @@ Table of contents
     - [BaseRealformHandler::setId](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setId.md) &ndash; Sets the realform id.
     - [BaseRealformHandler::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormHandler.md) &ndash; Returns a chloroform instance configured based on the realform id.
     - [BaseRealformHandler::getConfiguration](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getConfiguration.md) &ndash; Returns the realform configuration based on the realform id.
-    - [BaseRealformHandler::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getSuccessHandler.md) &ndash; The getSuccessHandler method
-    - [BaseRealformHandler::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md) &ndash; The getFormRenderer method
+    - [BaseRealformHandler::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getSuccessHandler.md) &ndash; Returns the success handler for this instance.
+    - [BaseRealformHandler::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md) &ndash; Returns the form renderer for this instance.
     - [BaseRealformHandler::setConfDir](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setConfDir.md) &ndash; Sets the confDir.
 - [RealformHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface.md) &ndash; The RealformHandlerInterface interface.
     - [RealformHandlerInterface::setId](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/setId.md) &ndash; Sets the realform id.
     - [RealformHandlerInterface::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormHandler.md) &ndash; Returns a chloroform instance configured based on the realform id.
     - [RealformHandlerInterface::getConfiguration](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getConfiguration.md) &ndash; Returns the realform configuration based on the realform id.
-    - [RealformHandlerInterface::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getSuccessHandler.md) &ndash; The getSuccessHandler method
-    - [RealformHandlerInterface::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormRenderer.md) &ndash; The getFormRenderer method
+    - [RealformHandlerInterface::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getSuccessHandler.md) &ndash; Returns the success handler for this instance.
+    - [RealformHandlerInterface::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormRenderer.md) &ndash; Returns the form renderer for this instance.
 - [RealformRendererInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Renderer/RealformRendererInterface.md) &ndash; The RealformRendererInterface interface.
 - [LightRealformService](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService.md) &ndash; The LightRealformService class.
     - [LightRealformService::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService/__construct.md) &ndash; Builds the LightRealformService instance.

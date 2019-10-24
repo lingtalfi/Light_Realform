@@ -7,7 +7,7 @@ BaseRealformHandler::getFormRenderer
 
 
 
-BaseRealformHandler::getFormRenderer — 
+BaseRealformHandler::getFormRenderer — Returns the form renderer for this instance.
 
 
 
@@ -16,12 +16,12 @@ Description
 ================
 
 
-public [BaseRealformHandler::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md)() : void
+public [BaseRealformHandler::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md)() : [RealformRendererInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Renderer/RealformRendererInterface.md)
 
 
 
 
-
+Returns the form renderer for this instance.
 
 
 
@@ -35,7 +35,7 @@ This method has no parameters.
 Return values
 ================
 
-Returns void.
+Returns [RealformRendererInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Renderer/RealformRendererInterface.md).
 
 
 

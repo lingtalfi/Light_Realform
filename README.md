@@ -33,6 +33,7 @@ Summary
 - Pages
     - [Conception notes linear](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes-linear.md)
     - [Conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes.md)
+    - [Realform configuration example](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/realform-config-example.md)
 
 - [Services](#services)
 - [Related](#related)
@@ -69,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.0.2 -- 2019-10-25
+
+    - add realform configuration example
+    
 - 1.0.1 -- 2019-10-21
 
     - add related section in README.md

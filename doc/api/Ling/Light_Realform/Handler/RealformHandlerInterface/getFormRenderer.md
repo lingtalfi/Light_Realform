@@ -7,7 +7,7 @@ RealformHandlerInterface::getFormRenderer
 
 
 
-RealformHandlerInterface::getFormRenderer — 
+RealformHandlerInterface::getFormRenderer — Returns the form renderer for this instance.
 
 
 
@@ -16,12 +16,12 @@ Description
 ================
 
 
-abstract public [RealformHandlerInterface::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormRenderer.md)() : void
+abstract public [RealformHandlerInterface::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormRenderer.md)() : [RealformRendererInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Renderer/RealformRendererInterface.md)
 
 
 
 
-
+Returns the form renderer for this instance.
 
 
 
@@ -35,7 +35,7 @@ This method has no parameters.
 Return values
 ================
 
-Returns void.
+Returns [RealformRendererInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Renderer/RealformRendererInterface.md).
 
 
 
@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [RealformHandlerInterface::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/RealformHandlerInterface.php#L47-L47)
+See the source code for method [RealformHandlerInterface::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/RealformHandlerInterface.php#L56-L56)
 
 
 See Also

@@ -16,7 +16,7 @@ Description
 ================
 
 
-protected [BaseRealformHandler::getChloroformValidator](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformValidator.md)(string $type, array $validatorConf) : Ling\Chloroform\Validator\ValidatorInterface
+protected [BaseRealformHandler::getChloroformValidator](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformValidator.md)(string $type, array $validatorConf) : [ValidatorInterface](https://github.com/lingtalfi/Chloroform/blob/master/doc/api/Ling/Chloroform/Validator/ValidatorInterface.md)
 
 
 
@@ -42,7 +42,7 @@ Parameters
 Return values
 ================
 
-Returns Ling\Chloroform\Validator\ValidatorInterface.
+Returns [ValidatorInterface](https://github.com/lingtalfi/Chloroform/blob/master/doc/api/Ling/Chloroform/Validator/ValidatorInterface.md).
 
 
 Exceptions thrown

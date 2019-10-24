@@ -16,7 +16,7 @@ Description
 ================
 
 
-protected [BaseRealformHandler::getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformField.md)(Ling\Chloroform\Form\Chloroform $form, string $type, string $fieldId, ?array $fieldConf = []) : Ling\Chloroform\Field\FieldInterface
+protected [BaseRealformHandler::getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformField.md)([Ling\Chloroform\Form\Chloroform](https://github.com/lingtalfi/Chloroform) $form, string $type, string $fieldId, ?array $fieldConf = []) : [FieldInterface](https://github.com/lingtalfi/Chloroform/blob/master/doc/api/Ling/Chloroform/Field/FieldInterface.md)
 
 
 
@@ -50,7 +50,7 @@ Parameters
 Return values
 ================
 
-Returns Ling\Chloroform\Field\FieldInterface.
+Returns [FieldInterface](https://github.com/lingtalfi/Chloroform/blob/master/doc/api/Ling/Chloroform/Field/FieldInterface.md).
 
 
 Exceptions thrown
