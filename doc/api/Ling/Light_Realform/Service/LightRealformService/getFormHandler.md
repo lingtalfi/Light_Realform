@@ -60,7 +60,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealformService::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L47-L60)
+See the source code for method [LightRealformService::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L69-L92)
 
 
 See Also

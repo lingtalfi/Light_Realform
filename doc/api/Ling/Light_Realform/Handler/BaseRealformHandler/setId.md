@@ -49,7 +49,7 @@ Returns mixed.
 
 Source Code
 ===========
-See the source code for method [BaseRealformHandler::setId](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L61-L64)
+See the source code for method [BaseRealformHandler::setId](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L87-L90)
 
 
 See Also
@@ -57,5 +57,5 @@ See Also
 
 The [BaseRealformHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler.md) class.
 
-Previous method: [__construct](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/__construct.md)<br>Next method: [getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormHandler.md)<br>
+Previous method: [setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setContainer.md)<br>Next method: [getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormHandler.md)<br>
 

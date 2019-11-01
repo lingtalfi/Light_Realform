@@ -1,8 +1,22 @@
 Light_Realform
 ===============
-2019-10-14
+2019-10-14 -> 2019-11-01
 
 
+
+
+
+Summary
+=========
+* [Intro](#intro)
+* [The form handler](#the-form-handler)
+* [The realform handler](#the-realform-handler)
+* [Dynamic injection](#dynamic-injection)
+
+
+
+Intro
+========
 The hope of this tool is to be able to create any form.
 
 
@@ -165,6 +179,37 @@ With:
 - RealformSuccessHandlerInterface->handle( formValidatedData ) 
 
 
+
+
+
+Dynamic injection
+=============
+2019-11-01
+
+We use the same system as [realist dynamic injection](https://github.com/lingtalfi/Light_Realist/blob/master/doc/pages/duelist.md#dynamic-injection).
+
+Dynamic injection basically allows us to add dynamic variables into the (otherwise static) configuration array.
+
+It allows this kind of syntax:
+
+```yaml
+csrf_token: REALFORM(Light_Realform, csrf_token, a_token_name)
+```
+
+The arguments of the REALFORM pseudo-function are:
+
+- the dynamic injection handler identifier, used to get the dynamicInjectionHandler instance.
+        In most cases we recommend using the plugin name.  
+- ...the rest of the arguments ("csrf_token" and "a_token_name" in the above example) are passed as an array to the dynamic injection handler.
+        Usually, the handlers use the first argument (csrf_token) as an "action" identifier, and then the rest of the arguments (a_token_name and what potentially follows)
+        as the arguments for that "action", but this is up to the dynamic injection handler instance.
+
+
+Now the **Light_Realform** plugin comes with its own dynamic injection handler, which use the second parameter as the action identifier (as described just above),
+and the available actions are:
+
+- csrf_token (string tokenName)
+        This method will create a token and return its value (i.e. the output of the LightCsrfService->createToken method).
 
 
 

@@ -5,7 +5,11 @@ namespace Ling\Light_Realform\Handler;
 
 
 use Ling\BabyYaml\BabyYamlUtil;
+use Ling\Bat\ArrayTool;
+use Ling\Bat\DebugTool;
 use Ling\Bat\FileSystemTool;
+use Ling\Bat\SmartCodeTool;
+use Ling\Chloroform\DataTransformer\DataTransformerInterface;
 use Ling\Chloroform\Field\CSRFField;
 use Ling\Chloroform\Field\FieldInterface;
 use Ling\Chloroform\Field\PasswordField;
@@ -15,15 +19,19 @@ use Ling\Chloroform\Validator\FileMimeTypeValidator;
 use Ling\Chloroform\Validator\PasswordConfirmValidator;
 use Ling\Chloroform\Validator\PasswordValidator;
 use Ling\Chloroform\Validator\ValidatorInterface;
+use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
+use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Realform\Exception\LightRealformException;
-use Ling\Light_Realform\Renderer\RealformRendererInterface;
+use Ling\Light_Realform\Service\LightRealformHandlerAliasHelperService;
+use Ling\Light_Realform\Service\LightRealformService;
 use Ling\Light_Realform\SuccessHandler\RealformSuccessHandlerInterface;
+use Ling\Light_Realform\SuccessHandler\ToDatabaseSuccessHandler;
 
 /**
  * The BaseRealformHandler class.
  * A helper to implement a realform handler, using my organization techniques.
  */
-abstract class BaseRealformHandler implements RealformHandlerInterface
+abstract class BaseRealformHandler implements RealformHandlerInterface, LightServiceContainerAwareInterface
 {
 
     /**
@@ -46,6 +54,13 @@ abstract class BaseRealformHandler implements RealformHandlerInterface
     protected $id;
 
     /**
+     * This property holds the container for this instance.
+     * @var LightServiceContainerInterface
+     */
+    protected $container;
+
+
+    /**
      * Builds the BaseRealformHandler instance.
      */
     public function __construct()
@@ -53,7 +68,18 @@ abstract class BaseRealformHandler implements RealformHandlerInterface
         $this->confDir = null;
         $this->id = null;
         $this->confCache = [];
+        $this->container = null;
     }
+
+
+    /**
+     * @implementation
+     */
+    public function setContainer(LightServiceContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
 
     /**
      * @implementation
@@ -72,6 +98,24 @@ abstract class BaseRealformHandler implements RealformHandlerInterface
         $conf = $this->getConfiguration();
         $formHandlerConf = $conf['form_handler'] ?? [];
 
+
+        //--------------------------------------------
+        // DYNAMIC INJECTION PHASE
+        //--------------------------------------------
+        /**
+         * @var $realformService LightRealformService
+         */
+        $realformService = $this->container->get("realform");
+        SmartCodeTool::replaceSmartCodeFunction($formHandlerConf, "REALFORM", function ($identifier) use ($realformService) {
+            $handler = $realformService->getDynamicInjectionHandler($identifier);
+            $args = func_get_args();
+            array_shift($args);
+            return $handler->handle($args);
+        });
+
+        //--------------------------------------------
+        //
+        //--------------------------------------------
         if (array_key_exists('class', $formHandlerConf)) {
             $formHandler = new $formHandlerConf['class'];
         } else {
@@ -100,6 +144,14 @@ abstract class BaseRealformHandler implements RealformHandlerInterface
                     }
                 }
                 $formHandler->addField($field, $validators);
+
+
+                if (array_key_exists('dataTransformer', $fieldConf)) {
+                    $dataTransformerValue = $fieldConf['dataTransformer'];
+                    $field->setDataTransformer($this->getDataTransformer($dataTransformerValue));
+                }
+
+
             }
         }
         return $formHandler;
@@ -129,15 +181,35 @@ abstract class BaseRealformHandler implements RealformHandlerInterface
      */
     public function getSuccessHandler(): RealformSuccessHandlerInterface
     {
-        // TODO: Implement getSuccessHandler() method.
-    }
+        $conf = $this->getConfiguration();
+        $successHandlerConf = $conf['on_success_handler'] ?? [];
 
-    /**
-     * @implementation
-     */
-    public function getFormRenderer(): RealformRendererInterface
-    {
-        // TODO: Implement getFormRenderer() method.
+        $params = $successHandlerConf['params'] ?? [];
+
+        if (array_key_exists('type', $successHandlerConf)) {
+            $type = $successHandlerConf['type'];
+            switch ($type) {
+                case "database":
+                    ArrayTool::arrayKeyExistAll("table", $params, true);
+
+
+                    $o = new ToDatabaseSuccessHandler();
+                    $o->setContainer($this->container);
+                    $o->setTable($params['table']);
+                    if (array_key_exists("microPermissionPluginName", $params)) {
+                        $o->setMicroPermissionPluginName($params['microPermissionPluginName']);
+                    }
+                    return $o;
+                    break;
+                default:
+                    $this->error("Not implemented yet: type $type.");
+                    break;
+            }
+
+
+        } else {
+            throw new LightRealformException("Missing parameter on_success_handler.type.");
+        }
     }
 
     //--------------------------------------------
@@ -227,6 +299,7 @@ abstract class BaseRealformHandler implements RealformHandlerInterface
         return $field;
     }
 
+
     /**
      * Returns a validator instance.
      *
@@ -294,7 +367,19 @@ abstract class BaseRealformHandler implements RealformHandlerInterface
                 $validator = new $class();
                 break;
             default:
-                throw new LightRealformException("Unknown validator class with type/id $type.");
+
+
+                /**
+                 * @var $aliasHelper LightRealformHandlerAliasHelperService
+                 */
+                $aliasHelper = $this->container->get("realform_handler_alias_helper");
+                $val = $aliasHelper->getChloroformValidator($type, $validatorConf);
+
+                if (null !== $val) {
+                    $validator = $val;
+                } else {
+                    throw new LightRealformException("Unknown validator class with type/id $type.");
+                }
                 break;
         }
 
@@ -310,5 +395,52 @@ abstract class BaseRealformHandler implements RealformHandlerInterface
 
         return $validator;
     }
+
+
+    /**
+     * Returns a dataTransformer instance.
+     *
+     * @param $value
+     * @return DataTransformerInterface
+     * @throws \Exception
+     */
+    protected function getDataTransformer($value): DataTransformerInterface
+    {
+        $transformer = null;
+        if (is_string($value)) {
+            /**
+             * @var $aliasHelper LightRealformHandlerAliasHelperService
+             */
+            $aliasHelper = $this->container->get("realform_handler_alias_helper");
+            $params = [];
+            $trans = $aliasHelper->getDataTransformer($value, $params);
+            if (null !== $trans) {
+                $transformer = $trans;
+            }
+        } else {
+            $this->error("Not handled yet with a non string value.");
+        }
+
+
+        if (null !== $transformer) {
+            return $transformer;
+        } else {
+            $sVal = DebugTool::toString($value);
+            throw new LightRealformException("Cannot find the dataTransformer with the value $sVal.");
+        }
+    }
+
+
+    /**
+     * Throws an exception with the given message.
+     *
+     * @param string $msg
+     * @throws \Exception
+     */
+    protected function error(string $msg)
+    {
+        throw new LightRealformException($msg);
+    }
+
 
 }

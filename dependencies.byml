@@ -1,8 +1,12 @@
 dependencies: 
     Ling: 
+        - Light
+        - Light_Csrf
+        - Chloroform
         - BabyYaml
         - Bat
-        - Chloroform
+        - Light_MicroPermission
+        - SimplePdoWrapper
     
 
 post_install: 

@@ -6,8 +6,6 @@ Light_Realform
 
 A tool for the [light framework](https://github.com/lingtalfi/Light) to create any form. 
 
-THIS IS A WORK IN PROGRESS...
-
 This is a [Light framework plugin](https://github.com/lingtalfi/Light/blob/master/doc/pages/plugin.md).
 
 This is part of the [universe framework](https://github.com/karayabin/universe-snapshot).
@@ -55,8 +53,9 @@ Here is an example of the service configuration:
 ```yaml
 realform:
     instance: Ling\Light_Realform\Service\LightRealformService
-
-
+    methods:
+        setContainer:
+            container: @container()
 ```
 
 
@@ -71,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.1.0 -- 2019-11-01
+
+    - finished the base implementation
+    
 - 1.0.4 -- 2019-10-24
 
     - add link in README.md

@@ -4,7 +4,7 @@
 
 The RealformHandlerInterface class
 ================
-2019-10-21 --> 2019-10-24
+2019-10-21 --> 2019-11-01
 
 
 
@@ -29,7 +29,6 @@ abstract class <span class="pl-k">RealformHandlerInterface</span>  {
     - abstract public [getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormHandler.md)() : [Chloroform](https://github.com/lingtalfi/Chloroform)
     - abstract public [getConfiguration](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getConfiguration.md)() : array
     - abstract public [getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getSuccessHandler.md)() : [RealformSuccessHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface.md)
-    - abstract public [getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormRenderer.md)() : [RealformRendererInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Renderer/RealformRendererInterface.md)
 
 }
 
@@ -45,7 +44,6 @@ Methods
 - [RealformHandlerInterface::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormHandler.md) &ndash; Returns a chloroform instance configured based on the realform id.
 - [RealformHandlerInterface::getConfiguration](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getConfiguration.md) &ndash; Returns the realform configuration based on the realform id.
 - [RealformHandlerInterface::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getSuccessHandler.md) &ndash; Returns the success handler for this instance.
-- [RealformHandlerInterface::getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface/getFormRenderer.md) &ndash; Returns the form renderer for this instance.
 
 
 

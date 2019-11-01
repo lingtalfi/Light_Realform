@@ -53,5 +53,5 @@ interface RealformHandlerInterface
      * Returns the form renderer for this instance.
      * @return RealformRendererInterface
      */
-    public function getFormRenderer(): RealformRendererInterface;
+//    public function getFormRenderer(): RealformRendererInterface;
 }

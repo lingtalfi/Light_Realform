@@ -4,7 +4,7 @@
 
 The RealformRendererInterface class
 ================
-2019-10-21 --> 2019-10-24
+2019-10-21 --> 2019-11-01
 
 
 
@@ -48,4 +48,4 @@ See the source code of [Ling\Light_Realform\Renderer\RealformRendererInterface](
 
 SeeAlso
 ==============
-Previous class: [RealformHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface.md)<br>Next class: [LightRealformService](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService.md)<br>
+Previous class: [RealformHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/RealformHandlerInterface.md)<br>Next class: [LightRealformHandlerAliasHelperService](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformHandlerAliasHelperService.md)<br>

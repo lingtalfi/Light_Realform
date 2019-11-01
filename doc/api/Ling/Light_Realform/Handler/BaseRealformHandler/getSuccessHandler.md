@@ -46,7 +46,7 @@ Returns [RealformSuccessHandlerInterface](https://github.com/lingtalfi/Light_Rea
 
 Source Code
 ===========
-See the source code for method [BaseRealformHandler::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L130-L133)
+See the source code for method [BaseRealformHandler::getSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L182-L213)
 
 
 See Also
@@ -54,5 +54,5 @@ See Also
 
 The [BaseRealformHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler.md) class.
 
-Previous method: [getConfiguration](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getConfiguration.md)<br>Next method: [getFormRenderer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getFormRenderer.md)<br>
+Previous method: [getConfiguration](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getConfiguration.md)<br>Next method: [setConfDir](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setConfDir.md)<br>
 

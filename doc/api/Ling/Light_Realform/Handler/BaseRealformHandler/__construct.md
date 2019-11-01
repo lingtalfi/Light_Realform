@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [BaseRealformHandler::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L51-L56)
+See the source code for method [BaseRealformHandler::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L66-L72)
 
 
 See Also
@@ -54,5 +54,5 @@ See Also
 
 The [BaseRealformHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler.md) class.
 
-Next method: [setId](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setId.md)<br>
+Next method: [setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/setContainer.md)<br>
 

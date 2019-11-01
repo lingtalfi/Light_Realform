@@ -58,7 +58,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [BaseRealformHandler::getChloroformValidator](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L238-L312)
+See the source code for method [BaseRealformHandler::getChloroformValidator](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L311-L397)
 
 
 See Also
@@ -66,5 +66,5 @@ See Also
 
 The [BaseRealformHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler.md) class.
 
-Previous method: [getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformField.md)<br>
+Previous method: [getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getChloroformField.md)<br>Next method: [getDataTransformer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Handler/BaseRealformHandler/getDataTransformer.md)<br>
 

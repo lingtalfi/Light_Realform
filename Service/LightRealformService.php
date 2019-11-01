@@ -3,6 +3,9 @@
 
 namespace Ling\Light_Realform\Service;
 
+use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
+use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_Realform\DynamicInjection\RealformDynamicInjectionHandlerInterface;
 use Ling\Light_Realform\Exception\LightRealformException;
 use Ling\Light_Realform\Handler\RealformHandlerInterface;
 
@@ -20,6 +23,23 @@ class LightRealformService
      */
     protected $handlers;
 
+    /**
+     * This property holds the container for this instance.
+     * @var LightServiceContainerInterface
+     */
+    protected $container;
+
+
+    /**
+     * This property holds the dynamicInjectionHandlers for this instance.
+     * It's an array of identifier => RealformDynamicInjectionHandlerInterface
+     *
+     * Usually the identifier is a plugin name.
+     *
+     * @var RealformDynamicInjectionHandlerInterface[]
+     */
+    protected $dynamicInjectionHandlers;
+
 
     /**
      * Builds the LightRealformService instance.
@@ -27,6 +47,8 @@ class LightRealformService
     public function __construct()
     {
         $this->handlers = [];
+        $this->dynamicInjectionHandlers = [];
+        $this->container = null;
     }
 
 
@@ -51,8 +73,18 @@ class LightRealformService
             list($pluginName, $id) = $p;
             if (array_key_exists($pluginName, $this->handlers)) {
                 $realformHandler = $this->handlers[$pluginName];
-                $realformHandler->setId($id);
-                return $realformHandler;
+
+                /**
+                 * Since there are potentially multiple forms on the same page,
+                 * we don't want to share the handler instance between forms,
+                 * we want to return a dedicated formHandler instance per identifier.
+                 */
+                $clone = clone($realformHandler);
+                $clone->setId($id);
+                if ($clone instanceof LightServiceContainerAwareInterface) {
+                    $clone->setContainer($this->container);
+                }
+                return $clone;
             }
             throw new LightRealformException("Form handler not found with identifier $identifier.");
         }
@@ -70,6 +102,49 @@ class LightRealformService
     {
         $this->handlers[$pluginName] = $formHandler;
     }
+
+    /**
+     * Registers a @page(dynamic injection handler).
+     * @param string $identifier
+     * @param RealformDynamicInjectionHandlerInterface $handler
+     */
+    public function registerDynamicInjectionHandler(string $identifier, RealformDynamicInjectionHandlerInterface $handler)
+    {
+        $this->dynamicInjectionHandlers[$identifier] = $handler;
+    }
+
+    /**
+     * Returns the realform dynamic injection handler associated with the given identifier,
+     * or throws an exception if it's not there.
+     *
+     * @param string $identifier
+     * @return RealformDynamicInjectionHandlerInterface
+     * @throws \Exception
+     */
+    public function getDynamicInjectionHandler(string $identifier): RealformDynamicInjectionHandlerInterface
+    {
+        if (array_key_exists($identifier, $this->dynamicInjectionHandlers)) {
+            $handler = $this->dynamicInjectionHandlers[$identifier];
+            if ($handler instanceof LightServiceContainerAwareInterface) {
+                $handler->setContainer($this->container);
+            }
+            return $handler;
+        }
+        throw new LightRealformException("Dynamic injection handler not found with identifier $identifier.");
+    }
+
+
+
+    /**
+     * Sets the container.
+     *
+     * @param LightServiceContainerInterface $container
+     */
+    public function setContainer(LightServiceContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
 
 
 

@@ -109,3 +109,40 @@ With:
 - RealformSuccessHandlerInterface->handle( formValidatedData ) 
 
 
+
+
+Realform handler alias helper
+==================
+2019-11-01
+
+
+To configure the formHandler instance correctly (usually a Chloroform instance),
+we use aliases in the configuration file.
+
+And so each field has an alias, and each validator has an alias, and each data transformer
+has an alias.
+
+For instance, the alias for the RequiredDateValidator is requiredDate.
+
+Because plugins can create their own validators, they also need a way to provide their aliases.
+
+This plugin's service will transmit the external plugin aliases to the
+main realform handler which uses them.
+
+If you are a plugin author and you want to provide your own aliases, you must create a class that 
+implements the **RealformHandlerAliasHelperInterface** and register it to our **realform_handler_alias_helper** service.
+
+See our service configuration file for more info.
+
+
+
+
+ 
+
+
+
+
+
+
+
+

@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealformService::setHandlers](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L85-L88)
+See the source code for method [LightRealformService::setHandlers](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L160-L163)
 
 
 See Also
@@ -57,5 +57,5 @@ See Also
 
 The [LightRealformService](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService.md) class.
 
-Previous method: [registerFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService/registerFormHandler.md)<br>
+Previous method: [setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService/setContainer.md)<br>
 

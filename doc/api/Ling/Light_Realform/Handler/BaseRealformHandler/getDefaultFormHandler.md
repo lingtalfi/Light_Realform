@@ -46,7 +46,7 @@ Returns [Chloroform](https://github.com/lingtalfi/Chloroform).
 
 Source Code
 ===========
-See the source code for method [BaseRealformHandler::getDefaultFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L164-L167)
+See the source code for method [BaseRealformHandler::getDefaultFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L236-L239)
 
 
 See Also

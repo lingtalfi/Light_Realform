@@ -1,6 +1,6 @@
 Realform configuration example
 ==============
-2019-10-24
+2019-10-24 -> 2019-10-31
 
 
 Below is an example of a realform configuration file used by a plugin I'm working on at the moment.
@@ -12,6 +12,8 @@ I added a lot of comments so that this can serve as the documentation for the re
 
 ```yaml
 
+# The form handler section is responsible for configuring the form handler (not to confound with the realform handler).
+# Usually, the form handler ends up being a Chloroform instance.
 form_handler:
     # The chloroform instance, otherwise the realform handler should provide a default instance.
     ?class: MyClass\Blabla
@@ -42,7 +44,6 @@ form_handler:
     #                               # - color
     #                               # - csrf (the case is an exception, because cSRF would be impractical)
     #                               # - date
-    #                               # - datetime
     #                               # - file
     #                               # - hidden
     #                               # - number
@@ -72,6 +73,7 @@ form_handler:
     #                               # - password
     #                               # - requiredDate
     #                               # - required
+    #                               # - ...(other aliases can be added, using the "realform_handler_alias_helper" service)
     #
     #                               # The validator parameters depend on the validator being used.
     #                               # But there is a common validator parameter:
@@ -79,6 +81,13 @@ form_handler:
     #                               #                 an array of [errorMessage, messageIdentifier].
     #                               #                 The default messageIdentifier is main.
     #                               #                 See the Ling\Chloroform\Validator\AbstractValidator class for more details.
+    # - ?dataTransformer: mixed     # an alias for the dataTransformer to use for this field. Aliases provided by external plugins are 
+    #                               # resolved via the "realform_handler_alias_helper" service.
+    #                               # 
+    #                               # Note: I stated it as a mixed type in case the dataTransformer requires more than an alias in the future. 
+    #                               # For instance, if it needs parameters too, then this dataTransformer option could also be an  
+    #                               # array like [dataTransformerAlias, dataTransformerParams]...
+    # 
     # - ... other properties, which are passed as properties of the field (see the Ling\Chloroform\Field\AbstractField constructor for more details).
     fields:
         identifier:
@@ -107,6 +116,17 @@ form_handler:
             type: text
             label: Extra
 
-on_success_handler: MyClass\Blabla
+# This section is used to configure the RealformSuccessHandlerInterface instance
+on_success_handler:
+    # The type is an arbitrary identifier representing the type of success handler required for this realform process.
+    # The type is specific to the concrete realform handler instance (i.e. see the concrete realform handler class for the available types),
+    type: database
+
+    # The params is an array of parameters to go along with the type (see the type entry just above).
+    # This is also specific to the concrete realform handler instance.
+    params:
+        table: lud_user
+
+
 
 ```
