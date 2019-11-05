@@ -4,7 +4,9 @@
 namespace Ling\Light_Realform\SuccessHandler;
 
 
+use Ling\Bat\ArrayTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_MicroPermission\Service\LightMicroPermissionService;
 use Ling\Light_Realform\Exception\LightRealformException;
 use Ling\SimplePdoWrapper\SimplePdoWrapperInterface;
@@ -109,7 +111,21 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
                 $microPerm .= 'update';
                 $this->checkMicroPermission($microPerm);
             }
-            $db->update($this->table, $data, $options['updateRic']);
+
+            $updateRic = $options['updateRic'];
+            /**
+             * @var $dbInfo LightDatabaseInfoService
+             */
+            $dbInfoService = $this->container->get("database_info");
+            $tableInfo = $dbInfoService->getTableInfo($this->table);
+            $ric = $tableInfo['ric'];
+
+            // ensure that the ric is given as the update columns
+            ArrayTool::arrayKeyExistAll($ric, $updateRic, true);
+            $updateRic = ArrayTool::intersect($updateRic, $ric);
+
+
+            $db->update($this->table, $data, $updateRic);
         }
         //--------------------------------------------
         // INSERT

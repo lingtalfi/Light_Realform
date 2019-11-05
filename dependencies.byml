@@ -5,6 +5,7 @@ dependencies:
         - Chloroform
         - BabyYaml
         - Bat
+        - Light_DatabaseInfo
         - Light_MicroPermission
         - SimplePdoWrapper
     

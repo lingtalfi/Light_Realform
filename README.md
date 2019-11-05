@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.2.0 -- 2019-11-05
+
+    - add title property in the configuration
+
 - 1.1.0 -- 2019-11-01
 
     - finished the base implementation
