@@ -21,6 +21,7 @@ use Ling\Chloroform\Validator\PasswordValidator;
 use Ling\Chloroform\Validator\ValidatorInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_ChloroformExtension\Field\TableListField;
 use Ling\Light_Realform\Exception\LightRealformException;
 use Ling\Light_Realform\Service\LightRealformHandlerAliasHelperService;
 use Ling\Light_Realform\Service\LightRealformService;
@@ -241,6 +242,7 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
 
     /**
      * Returns a chloroform field.
+     * Note: fields from the @page(Light_ChloroformExtension plugin) also work.
      *
      * @param Chloroform $form
      * @param string $type
@@ -290,8 +292,12 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
                 $field = new PasswordField($fieldConf);
                 $field->setForm($form);
                 break;
+            case "table_list":
+                $field = new TableListField($fieldConf);
+                $field->setContainer($this->container);
+                break;
             default:
-                throw new LightRealformException("Unknown field class with id $fieldId.");
+                throw new LightRealformException("Unknown field type \"$type\" with id $fieldId.");
                 break;
         }
 

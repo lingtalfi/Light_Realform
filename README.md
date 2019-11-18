@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.3.0 -- 2019-11-18
+
+    - update BaseRealformHandler->getChloroformField, now handles table_list field
+    
 - 1.2.0 -- 2019-11-05
 
     - add title property in the configuration
