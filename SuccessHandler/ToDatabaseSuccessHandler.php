@@ -5,6 +5,7 @@ namespace Ling\Light_Realform\SuccessHandler;
 
 
 use Ling\Bat\ArrayTool;
+use Ling\Chloroform\Form\Chloroform;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_MicroPermission\Service\LightMicroPermissionService;
@@ -87,7 +88,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
      *
      * @implementation
      */
-    public function processData(array $data, array $options = [])
+    public function processData(array $data, Chloroform $form, array $options = [])
     {
 
         $useMicroPerm = false;

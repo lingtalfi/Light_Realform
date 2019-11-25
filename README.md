@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.4.0 -- 2019-11-25
+
+    - update RealformSuccessHandlerInterface->processData now takes the form instance as second argument
+    
 - 1.3.0 -- 2019-11-18
 
     - update BaseRealformHandler->getChloroformField, now handles table_list field
