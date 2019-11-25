@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.5.0 -- 2019-11-25
+
+    - update ToDatabaseSuccessHandler, now can handle iframe-signal
+    
 - 1.4.0 -- 2019-11-25
 
     - update RealformSuccessHandlerInterface->processData now takes the form instance as second argument

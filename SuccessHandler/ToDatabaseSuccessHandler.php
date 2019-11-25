@@ -62,6 +62,12 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
      */
     protected $microPermissionPluginName;
 
+    /**
+     * This property holds the iframeSignal value for this instance.
+     * @var string
+     */
+    protected $iframeSignal;
+
 
     /**
      * Builds the ToDatabaseSuccessHandler instance.
@@ -71,6 +77,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
         $this->table = null;
         $this->container = null;
         $this->microPermissionPluginName = null;
+        $this->iframeSignal = null;
     }
 
 
@@ -138,6 +145,13 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
             }
             $db->insert($this->table, $data);
         }
+
+
+        if (null !== $this->iframeSignal) {
+            $form->setProperty('iframe-signal', $this->iframeSignal);
+        }
+
+
     }
 
 
@@ -173,6 +187,17 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
     {
         $this->microPermissionPluginName = $microPermissionPluginName;
     }
+
+    /**
+     * Sets the iframeSignal.
+     *
+     * @param string $iframeSignal
+     */
+    public function setIframeSignal(string $iframeSignal)
+    {
+        $this->iframeSignal = $iframeSignal;
+    }
+
 
 
     //--------------------------------------------

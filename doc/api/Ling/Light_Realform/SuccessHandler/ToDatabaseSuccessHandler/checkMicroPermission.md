@@ -55,7 +55,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [ToDatabaseSuccessHandler::checkMicroPermission](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L189-L198)
+See the source code for method [ToDatabaseSuccessHandler::checkMicroPermission](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L214-L223)
 
 
 See Also
@@ -63,5 +63,5 @@ See Also
 
 The [ToDatabaseSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler.md) class.
 
-Previous method: [setMicroPermissionPluginName](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setMicroPermissionPluginName.md)<br>
+Previous method: [setIframeSignal](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setIframeSignal.md)<br>
 

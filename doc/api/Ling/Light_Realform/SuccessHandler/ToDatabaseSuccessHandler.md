@@ -42,6 +42,7 @@ class <span class="pl-k">ToDatabaseSuccessHandler</span> implements [RealformSuc
     - protected string [$table](#property-table) ;
     - protected [Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) [$container](#property-container) ;
     - protected string|null [$microPermissionPluginName](#property-microPermissionPluginName) ;
+    - protected string [$iframeSignal](#property-iframeSignal) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/__construct.md)() : void
@@ -49,6 +50,7 @@ class <span class="pl-k">ToDatabaseSuccessHandler</span> implements [RealformSuc
     - public [setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setContainer.md)([Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
     - public [setTable](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setTable.md)(string $table) : void
     - public [setMicroPermissionPluginName](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setMicroPermissionPluginName.md)(string $microPermissionPluginName) : void
+    - public [setIframeSignal](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setIframeSignal.md)(string $iframeSignal) : void
     - protected [checkMicroPermission](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/checkMicroPermission.md)(string $microPermission) : void
 
 }
@@ -80,6 +82,12 @@ Properties
     
     
 
+- <span id="property-iframeSignal"><b>iframeSignal</b></span>
+
+    This property holds the iframeSignal value for this instance.
+    
+    
+
 
 
 Methods
@@ -90,6 +98,7 @@ Methods
 - [ToDatabaseSuccessHandler::setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setContainer.md) &ndash; Sets the container.
 - [ToDatabaseSuccessHandler::setTable](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setTable.md) &ndash; Sets the table.
 - [ToDatabaseSuccessHandler::setMicroPermissionPluginName](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setMicroPermissionPluginName.md) &ndash; Sets the microPermissionPluginName.
+- [ToDatabaseSuccessHandler::setIframeSignal](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setIframeSignal.md) &ndash; Sets the iframeSignal.
 - [ToDatabaseSuccessHandler::checkMicroPermission](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/checkMicroPermission.md) &ndash; Ensures that the current user has the given micro-permission.
 
 

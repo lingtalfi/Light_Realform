@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [ToDatabaseSuccessHandler::setTable](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L162-L165)
+See the source code for method [ToDatabaseSuccessHandler::setTable](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L176-L179)
 
 
 See Also
