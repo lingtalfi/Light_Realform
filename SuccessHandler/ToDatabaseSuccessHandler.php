@@ -5,7 +5,6 @@ namespace Ling\Light_Realform\SuccessHandler;
 
 
 use Ling\Bat\ArrayTool;
-use Ling\Chloroform\Form\Chloroform;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_MicroPermission\Service\LightMicroPermissionService;
@@ -62,12 +61,6 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
      */
     protected $microPermissionPluginName;
 
-    /**
-     * This property holds the iframeSignal value for this instance.
-     * @var string
-     */
-    protected $iframeSignal;
-
 
     /**
      * Builds the ToDatabaseSuccessHandler instance.
@@ -77,7 +70,6 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
         $this->table = null;
         $this->container = null;
         $this->microPermissionPluginName = null;
-        $this->iframeSignal = null;
     }
 
 
@@ -95,7 +87,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
      *
      * @implementation
      */
-    public function processData(array $data, Chloroform $form, array $options = [])
+    public function processData(array $data, array $options = [])
     {
 
         $useMicroPerm = false;
@@ -133,6 +125,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
             $updateRic = ArrayTool::intersect($updateRic, $ric);
 
 
+
             $db->update($this->table, $data, $updateRic);
         }
         //--------------------------------------------
@@ -145,13 +138,6 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
             }
             $db->insert($this->table, $data);
         }
-
-
-        if (null !== $this->iframeSignal) {
-            $form->setProperty('iframe-signal', $this->iframeSignal);
-        }
-
-
     }
 
 
@@ -187,17 +173,6 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
     {
         $this->microPermissionPluginName = $microPermissionPluginName;
     }
-
-    /**
-     * Sets the iframeSignal.
-     *
-     * @param string $iframeSignal
-     */
-    public function setIframeSignal(string $iframeSignal)
-    {
-        $this->iframeSignal = $iframeSignal;
-    }
-
 
 
     //--------------------------------------------

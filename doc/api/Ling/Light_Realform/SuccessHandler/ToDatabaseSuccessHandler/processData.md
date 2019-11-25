@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [ToDatabaseSuccessHandler::processData](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/processData.md)(array $data, [Ling\Chloroform\Form\Chloroform](https://github.com/lingtalfi/Chloroform) $form, ?array $options = []) : mixed
+public [ToDatabaseSuccessHandler::processData](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/processData.md)(array $data, ?array $options = []) : mixed
 
 
 
@@ -36,9 +36,6 @@ See the notes in the class description for more details.
 Process the given data, and throws an exception if something unexpected happens.
 
 
-Note: the form instance is available as an argument so that you can set properties if needed.
-
-
 
 
 Parameters
@@ -46,10 +43,6 @@ Parameters
 
 
 - data
-
-    
-
-- form
 
     
 
@@ -72,7 +65,7 @@ Returns mixed.
 
 Source Code
 ===========
-See the source code for method [ToDatabaseSuccessHandler::processData](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L98-L155)
+See the source code for method [ToDatabaseSuccessHandler::processData](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L90-L141)
 
 
 See Also

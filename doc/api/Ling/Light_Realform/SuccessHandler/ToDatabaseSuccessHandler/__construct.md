@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [ToDatabaseSuccessHandler::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L75-L81)
+See the source code for method [ToDatabaseSuccessHandler::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L68-L73)
 
 
 See Also

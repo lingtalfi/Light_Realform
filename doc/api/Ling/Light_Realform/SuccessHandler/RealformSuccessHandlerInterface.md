@@ -25,7 +25,7 @@ Class synopsis
 abstract class <span class="pl-k">RealformSuccessHandlerInterface</span>  {
 
 - Methods
-    - abstract public [processData](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface/processData.md)(array $data, [Ling\Chloroform\Form\Chloroform](https://github.com/lingtalfi/Chloroform) $form, ?array $options = []) : mixed
+    - abstract public [processData](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface/processData.md)(array $data, ?array $options = []) : mixed
 
 }
 
