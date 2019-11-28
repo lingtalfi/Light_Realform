@@ -6,9 +6,7 @@ dependencies:
         - BabyYaml
         - Bat
         - Light_ChloroformExtension
-        - Light_DatabaseInfo
-        - Light_MicroPermission
-        - SimplePdoWrapper
+        - Light_Crud
     
 
 post_install: 

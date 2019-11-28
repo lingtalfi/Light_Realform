@@ -197,8 +197,8 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
                     $o = new ToDatabaseSuccessHandler();
                     $o->setContainer($this->container);
                     $o->setTable($params['table']);
-                    if (array_key_exists("microPermissionPluginName", $params)) {
-                        $o->setMicroPermissionPluginName($params['microPermissionPluginName']);
+                    if (array_key_exists("pluginName", $params)) {
+                        $o->setPluginName($params['pluginName']);
                     }
                     return $o;
                     break;

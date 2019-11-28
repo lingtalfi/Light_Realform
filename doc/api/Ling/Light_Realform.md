@@ -1,6 +1,6 @@
 Ling/Light_Realform
 ================
-2019-10-21 --> 2019-11-25
+2019-10-21 --> 2019-11-28
 
 
 
@@ -60,7 +60,7 @@ Table of contents
     - [ToDatabaseSuccessHandler::processData](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/processData.md) &ndash; - ?updateRic: the array of key => value pairs representing the row to update (i.e.
     - [ToDatabaseSuccessHandler::setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setContainer.md) &ndash; Sets the container.
     - [ToDatabaseSuccessHandler::setTable](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setTable.md) &ndash; Sets the table.
-    - [ToDatabaseSuccessHandler::setMicroPermissionPluginName](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setMicroPermissionPluginName.md) &ndash; Sets the microPermissionPluginName.
+    - [ToDatabaseSuccessHandler::setPluginName](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setPluginName.md) &ndash; Sets the pluginName.
 
 
 Dependencies
@@ -71,8 +71,6 @@ Dependencies
 - [BabyYaml](https://github.com/lingtalfi/BabyYaml)
 - [Bat](https://github.com/lingtalfi/Bat)
 - [Light_ChloroformExtension](https://github.com/lingtalfi/Light_ChloroformExtension)
-- [Light_DatabaseInfo](https://github.com/lingtalfi/Light_DatabaseInfo)
-- [Light_MicroPermission](https://github.com/lingtalfi/Light_MicroPermission)
-- [SimplePdoWrapper](https://github.com/lingtalfi/SimplePdoWrapper)
+- [Light_Crud](https://github.com/lingtalfi/Light_Crud)
 
 

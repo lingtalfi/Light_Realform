@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.7.0 -- 2019-11-28
+
+    - update ToDatabaseSuccessHandler, now delegates to Light_Crud service
+    
 - 1.6.0 -- 2019-11-25
 
     - update RealformSuccessHandlerInterface->processData removed the form instance as second argument (conception error)
