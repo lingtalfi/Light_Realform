@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.8.0 -- 2019-11-29
+
+    - add LightRealformRoutineOne
+
 - 1.7.0 -- 2019-11-28
 
     - update ToDatabaseSuccessHandler, now delegates to Light_Crud service

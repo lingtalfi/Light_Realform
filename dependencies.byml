@@ -6,6 +6,12 @@ dependencies:
         - BabyYaml
         - Bat
         - Light_ChloroformExtension
+        - Light_DatabaseInfo
+        - Light_Events
+        - Light_Flasher
+        - Light_MicroPermission
+        - SimplePdoWrapper
+        - WiseTool
         - Light_Crud
     
 
