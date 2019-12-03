@@ -1,6 +1,6 @@
 Ling/Light_Realform
 ================
-2019-10-21 --> 2019-11-29
+2019-10-21 --> 2019-12-03
 
 
 
@@ -65,6 +65,7 @@ Table of contents
     - [ToDatabaseSuccessHandler::setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setContainer.md) &ndash; Sets the container.
     - [ToDatabaseSuccessHandler::setTable](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setTable.md) &ndash; Sets the table.
     - [ToDatabaseSuccessHandler::setPluginName](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setPluginName.md) &ndash; Sets the pluginName.
+    - [ToDatabaseSuccessHandler::setMultiplier](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setMultiplier.md) &ndash; Sets the multiplier.
 
 
 Dependencies

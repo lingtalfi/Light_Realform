@@ -4,7 +4,7 @@
 
 The ToDatabaseSuccessHandler class
 ================
-2019-10-21 --> 2019-11-29
+2019-10-21 --> 2019-12-03
 
 
 
@@ -33,6 +33,9 @@ As a design choice, this class doesn't handle permission problem: I believe it's
 problems separately.
 
 
+This handler can handle [the form multiplier pattern](https://github.com/lingtalfi/TheBar/blob/master/discussions/form-multiplier.md).
+
+
 
 Class synopsis
 ==============
@@ -44,6 +47,7 @@ class <span class="pl-k">ToDatabaseSuccessHandler</span> implements [RealformSuc
     - protected string [$table](#property-table) ;
     - protected [Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) [$container](#property-container) ;
     - protected string [$pluginName](#property-pluginName) ;
+    - protected array [$multiplier](#property-multiplier) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/__construct.md)() : void
@@ -51,6 +55,7 @@ class <span class="pl-k">ToDatabaseSuccessHandler</span> implements [RealformSuc
     - public [setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setContainer.md)([Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
     - public [setTable](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setTable.md)(string $table) : void
     - public [setPluginName](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setPluginName.md)(string $pluginName) : void
+    - public [setMultiplier](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setMultiplier.md)(array $multiplier) : void
 
 }
 
@@ -79,6 +84,13 @@ Properties
     
     
 
+- <span id="property-multiplier"><b>multiplier</b></span>
+
+    This property holds the multiplier array for this instance.
+    See more details in [the form multiplier trick document](https://github.com/lingtalfi/TheBar/blob/master/discussions/form-multiplier.md).
+    
+    
+
 
 
 Methods
@@ -89,6 +101,7 @@ Methods
 - [ToDatabaseSuccessHandler::setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setContainer.md) &ndash; Sets the container.
 - [ToDatabaseSuccessHandler::setTable](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setTable.md) &ndash; Sets the table.
 - [ToDatabaseSuccessHandler::setPluginName](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setPluginName.md) &ndash; Sets the pluginName.
+- [ToDatabaseSuccessHandler::setMultiplier](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setMultiplier.md) &ndash; Sets the multiplier.
 
 
 

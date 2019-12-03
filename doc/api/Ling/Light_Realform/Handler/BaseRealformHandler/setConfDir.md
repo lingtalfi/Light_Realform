@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [BaseRealformHandler::setConfDir](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L224-L227)
+See the source code for method [BaseRealformHandler::setConfDir](https://github.com/lingtalfi/Light_Realform/blob/master/Handler/BaseRealformHandler.php#L227-L230)
 
 
 See Also

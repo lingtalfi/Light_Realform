@@ -27,6 +27,9 @@ use Ling\Light_Crud\Service\LightCrudService;
  * problems separately.
  *
  *
+ * This handler can handle @page(the form multiplier pattern).
+ *
+ *
  *
  *
  *
@@ -58,6 +61,14 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
 
 
     /**
+     * This property holds the multiplier array for this instance.
+     * See more details in @page(the form multiplier trick document).
+     * @var array
+     */
+    protected $multiplier;
+
+
+    /**
      * Builds the ToDatabaseSuccessHandler instance.
      */
     public function __construct()
@@ -65,6 +76,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
         $this->table = null;
         $this->container = null;
         $this->pluginName = null;
+        $this->multiplier = null;
     }
 
 
@@ -99,6 +111,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
             $crud->execute($contextId, $this->table, 'update', [
                 'data' => $data,
                 'updateRic' => $updateRic,
+                'multiplier' => $this->multiplier,
             ]);
         }
         //--------------------------------------------
@@ -107,6 +120,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
         else {
             $crud->execute($contextId, $this->table, 'create', [
                 'data' => $data,
+                'multiplier' => $this->multiplier,
             ]);
         }
     }
@@ -143,6 +157,16 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
     public function setPluginName(string $pluginName)
     {
         $this->pluginName = $pluginName;
+    }
+
+    /**
+     * Sets the multiplier.
+     *
+     * @param array $multiplier
+     */
+    public function setMultiplier(array $multiplier)
+    {
+        $this->multiplier = $multiplier;
     }
 
 

@@ -218,6 +218,18 @@ class LightRealformRoutineOne
                         if (true === $isUpdate) {
                             foreach ($vid as $k => $v) {
                                 if (in_array($k, $ric, true) && array_key_exists($k, $_GET)) {
+
+                                    /**
+                                     * However, the comment above only applies if there is not form multiplier trick.
+                                     * See https://github.com/lingtalfi/TheBar/blob/master/discussions/form-multiplier.md for more info.
+                                     *
+                                     * If the multiplier trick is on, we want to keep the old rows values.
+                                     *
+                                     */
+                                    if (is_array($v)) { // form multiplier trick, probably
+                                        $v = $_GET[$k];
+                                    }
+
                                     $_GET[$k] = $v;
                                 }
                             }

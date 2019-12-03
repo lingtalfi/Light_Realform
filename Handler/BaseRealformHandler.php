@@ -200,6 +200,9 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
                     if (array_key_exists("pluginName", $params)) {
                         $o->setPluginName($params['pluginName']);
                     }
+                    if (array_key_exists("multiplier", $params)) {
+                        $o->setMultiplier($params['multiplier']);
+                    }
                     return $o;
                     break;
                 default:

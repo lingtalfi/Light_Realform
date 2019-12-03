@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.9.0 -- 2019-12-03
+
+    - update ToDatabaseSuccessHandler, now handles form multiplier trick
+    
 - 1.8.0 -- 2019-11-29
 
     - add LightRealformRoutineOne
