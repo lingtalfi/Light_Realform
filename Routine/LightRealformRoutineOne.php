@@ -120,6 +120,7 @@ class LightRealformRoutineOne
         if (true === ArrayTool::arrayKeyExistAll($ric, $_GET)) {
             $isUpdate = true;
             $updateRic = ArrayTool::intersect($_GET, $ric);
+
         }
 
 
@@ -144,6 +145,11 @@ class LightRealformRoutineOne
         $rfHandler = $rf->getFormHandler($realformIdentifier);
 
         $form = $rfHandler->getFormHandler();
+        if (true === $isUpdate) {
+            $form->setMode("update");
+        } else {
+            $form->setMode("insert");
+        }
 
         //--------------------------------------------
         // Posting the form and validating data

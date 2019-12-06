@@ -111,7 +111,6 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
             $crud->execute($contextId, $this->table, 'update', [
                 'data' => $data,
                 'updateRic' => $updateRic,
-                'multiplier' => $this->multiplier,
             ]);
         }
         //--------------------------------------------

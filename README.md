@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.10.0 -- 2019-12-06
+
+    - update ToDatabaseSuccessHandler to handle latest form multiplier trick
+    
 - 1.9.0 -- 2019-12-03
 
     - update ToDatabaseSuccessHandler, now handles form multiplier trick
