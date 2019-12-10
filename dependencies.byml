@@ -12,6 +12,8 @@ dependencies:
         - Light_MicroPermission
         - SimplePdoWrapper
         - WiseTool
+        - Light_Database
+        - Light_LightInstance
         - Light_Crud
     
 

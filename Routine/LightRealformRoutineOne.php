@@ -208,9 +208,16 @@ class LightRealformRoutineOne
                     } else {
 
                         /**
-                         * We redirect because the user data is used in the gui (for instance in the icon menu in the header.
+                         * We prepare the redirect here.
+                         * Redirect is good because the user data is used in the gui (for instance in the icon menu in the header).
                          * And so if the user changed her avatar for instance, we want her to notice the changes right away.
-                         * Hence we redirect to the same page
+                         * Hence we redirect to the same page.
+                         *
+                         * Or even a simpler use case: an update form posted successfully: you want
+                         * the new/updated values to show up (and depending on when your form handler
+                         * injects the values into the template, you might need a redirect here too to
+                         * refresh the page values).
+                         *
                          */
 
 

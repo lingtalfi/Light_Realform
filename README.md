@@ -70,6 +70,11 @@ Related
 History Log
 =============
 
+- 1.11.0 -- 2019-12-10
+
+    - add LightRealformRoutineTwo
+    - update RealformHandlerInterface->getFormHandler method, add configuration optional argument
+    
 - 1.10.0 -- 2019-12-06
 
     - update ToDatabaseSuccessHandler to handle latest form multiplier trick

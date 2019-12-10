@@ -11,6 +11,7 @@ use Ling\Bat\FileSystemTool;
 use Ling\Bat\SmartCodeTool;
 use Ling\Chloroform\DataTransformer\DataTransformerInterface;
 use Ling\Chloroform\Field\CSRFField;
+use Ling\Chloroform\Field\DecorativeField;
 use Ling\Chloroform\Field\FieldInterface;
 use Ling\Chloroform\Field\PasswordField;
 use Ling\Chloroform\Form\Chloroform;
@@ -94,9 +95,16 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
     /**
      * @implementation
      */
-    public function getFormHandler(): Chloroform
+    public function getFormHandler(array $configuration = null): Chloroform
     {
-        $conf = $this->getConfiguration();
+        if (null === $configuration) {
+            $conf = $this->getConfiguration();
+        } else {
+            $conf = $configuration;
+        }
+
+
+
         $formHandlerConf = $conf['form_handler'] ?? [];
 
 
@@ -295,6 +303,9 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
                 $field = new PasswordField($fieldConf);
                 $field->setForm($form);
                 break;
+            case "decorative":
+                $field = new DecorativeField($fieldConf);
+                break;
             case "table_list":
                 $field = new TableListField($fieldConf);
                 $field->setContainer($this->container);
@@ -376,7 +387,6 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
                 $validator = new $class();
                 break;
             default:
-
 
 
                 /**
