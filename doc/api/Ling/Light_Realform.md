@@ -1,6 +1,6 @@
 Ling/Light_Realform
 ================
-2019-10-21 --> 2019-12-10
+2019-10-21 --> 2019-12-16
 
 
 
@@ -87,7 +87,6 @@ Dependencies
 - [SimplePdoWrapper](https://github.com/lingtalfi/SimplePdoWrapper)
 - [WiseTool](https://github.com/lingtalfi/WiseTool)
 - [Light_Database](https://github.com/lingtalfi/Light_Database)
-- [Light_LightInstance](https://github.com/lingtalfi/Light_LightInstance)
 - [Light_Crud](https://github.com/lingtalfi/Light_Crud)
 
 

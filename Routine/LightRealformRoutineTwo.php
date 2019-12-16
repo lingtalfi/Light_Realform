@@ -16,7 +16,6 @@ use Ling\Light_Database\Service\LightDatabaseService;
 use Ling\Light_DatabaseInfo\Service\LightDatabaseInfoService;
 use Ling\Light_Events\Service\LightEventsService;
 use Ling\Light_Flasher\Service\LightFlasherService;
-use Ling\Light_LightInstance\Service\LightLightInstanceService;
 use Ling\Light_MicroPermission\Service\LightMicroPermissionService;
 use Ling\Light_Realform\Exception\LightRealformException;
 use Ling\Light_Realform\Service\LightRealformService;
@@ -229,8 +228,6 @@ class LightRealformRoutineTwo
         }
 
 
-
-
         $formCssId = StringTool::getUniqueCssId("lrfr2-form-");
         $ourConf = $conf;
         $ourConf["form_handler"]['fields'] = $ourFields;
@@ -394,15 +391,9 @@ class LightRealformRoutineTwo
                          */
                         $flasher = $this->container->get('flasher');
                         $flasher->addFlash($table, "Congrats, the form was successfully processed.");
-
-                        /**
-                         * @var $lightInstance LightLightInstanceService
-                         */
-                        $lightInstance = $this->container->get("light_instance");
-                        $lightInstance->getLight();
-
+                        $lightInstance = $this->container->getLight();
                         UriTool::randomize($_GET, '_r');
-                        throw LightRedirectException::create()->setRedirectRoute($lightInstance->getLight()->getMatchingRoute()['name']);
+                        throw LightRedirectException::create()->setRedirectRoute($lightInstance->getMatchingRoute()['name']);
                     }
 
                 } else {

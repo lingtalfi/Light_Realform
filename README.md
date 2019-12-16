@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.12.0 -- 2019-12-16
+
+    - update plugin to accommodate new Light service container
+
 - 1.11.0 -- 2019-12-10
 
     - add LightRealformRoutineTwo
