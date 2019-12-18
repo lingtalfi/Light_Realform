@@ -79,12 +79,11 @@ class LightRealformRoutineOne
      *
      * @param string $realformIdentifier
      * @param string $table
-     * @param string $pluginName
      * @param array $options
      * @return Chloroform
      * @throws \Exception
      */
-    public function processForm(string $realformIdentifier, string $table, string $pluginName, array $options = []): Chloroform
+    public function processForm(string $realformIdentifier, string $table, array $options = []): Chloroform
     {
 
         $iframeSignal = $options['iframeSignal'] ?? null;
@@ -266,7 +265,7 @@ class LightRealformRoutineOne
             /**
              * Using recommended notation for micro-permission interaction with database.
              */
-            $microPermission = "$pluginName.tables.$table.read";
+            $microPermission = "tables.$table.read";
             /**
              * @var $microService LightMicroPermissionService
              */

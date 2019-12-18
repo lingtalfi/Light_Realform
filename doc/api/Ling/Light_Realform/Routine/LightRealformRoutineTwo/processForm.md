@@ -26,8 +26,6 @@ and returns a chloroform instance.
 
 The available options are:
 
-- pluginName: string. Optional, defaults to null. The name of the plugin to use for micro permissions.
-         If not set, the micro-permissions system will not be used.
 - post: array. Optional = []. Some extra parameters to add to the form.
 
 
@@ -73,7 +71,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealformRoutineTwo::processForm](https://github.com/lingtalfi/Light_Realform/blob/master/Routine/LightRealformRoutineTwo.php#L100-L426)
+See the source code for method [LightRealformRoutineTwo::processForm](https://github.com/lingtalfi/Light_Realform/blob/master/Routine/LightRealformRoutineTwo.php#L98-L414)
 
 
 See Also

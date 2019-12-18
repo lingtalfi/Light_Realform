@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.13.0 -- 2019-12-18
+
+    - update to accommodate Light_MicroPermission 2.0
+
 - 1.12.0 -- 2019-12-16
 
     - update plugin to accommodate new Light service container

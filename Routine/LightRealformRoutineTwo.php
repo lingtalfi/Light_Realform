@@ -83,8 +83,6 @@ class LightRealformRoutineTwo
      *
      * The available options are:
      *
-     * - pluginName: string. Optional, defaults to null. The name of the plugin to use for micro permissions.
-     *          If not set, the micro-permissions system will not be used.
      * - post: array. Optional = []. Some extra parameters to add to the form.
      *
      *
@@ -99,11 +97,6 @@ class LightRealformRoutineTwo
      */
     public function processForm(string $realformIdentifier, string $table, array $rics, array $options = []): Chloroform
     {
-
-
-        $pluginName = $options['pluginName'] ?? null;
-        $post = $options['post'] ?? [];
-
 
         /**
          * Ensure that the columns provided by the user are the ric strict columns,
@@ -125,22 +118,17 @@ class LightRealformRoutineTwo
         //--------------------------------------------
         // FIRST GET THE ROWS FROM THE DATABASE
         //--------------------------------------------
-
-
         $microPermissionError = null;
-        if (null !== $pluginName) {
-
-            /**
-             * Using recommended notation for micro-permission interaction with database.
-             */
-            $microPermission = "$pluginName.tables.$table.read";
-            /**
-             * @var $microService LightMicroPermissionService
-             */
-            $microService = $this->container->get("micro_permission");
-            if (false === $microService->hasMicroPermission($microPermission)) {
-                $microPermissionError = "You don't have the permission to access this page (you miss the \"$microPermission\" microPermission).";
-            }
+        /**
+         * Using recommended notation for micro-permission interaction with database.
+         */
+        $microPermission = "tables.$table.read";
+        /**
+         * @var $microService LightMicroPermissionService
+         */
+        $microService = $this->container->get("micro_permission");
+        if (false === $microService->hasMicroPermission($microPermission)) {
+            $microPermissionError = "You don't have the permission to access this page (you miss the \"$microPermission\" microPermission).";
         }
 
 
@@ -278,7 +266,7 @@ class LightRealformRoutineTwo
                         /**
                          * Using recommended notation for micro-permission interaction with database.
                          */
-                        $microPermission = "$pluginName.tables.$table.update";
+                        $microPermission = "tables.$table.update";
                         /**
                          * @var $microService LightMicroPermissionService
                          */
