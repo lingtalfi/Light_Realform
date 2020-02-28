@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21
+2019-10-21 -> 2020-02-28
 
 
 
@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.13.1 -- 2020-02-28
+
+    - fix LightRealformRoutineTwo->processForm displaying share checkboxes even when there is only one record to edit
+    
 - 1.13.0 -- 2019-12-18
 
     - update to accommodate Light_MicroPermission 2.0

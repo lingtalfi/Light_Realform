@@ -113,6 +113,7 @@ class LightRealformRoutineTwo
         $dbInfoService = $this->container->get("database_info");
         $tableInfo = $dbInfoService->getTableInfo($table);
         $ric = $tableInfo['ricStrict'];
+        $useShare = (count($rics) > 1);
 
 
         //--------------------------------------------
@@ -200,7 +201,9 @@ class LightRealformRoutineTwo
                 "type" => "checkbox",
                 "items" => $items,
             ];
-            $ourFields[$shareFieldId] = $shareField;
+            if (true === $useShare) {
+                $ourFields[$shareFieldId] = $shareField;
+            }
 
 
             // add hr deco
