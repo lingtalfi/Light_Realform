@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2020-03-07
+2019-10-21 -> 2020-07-07
 
 
 
@@ -70,7 +70,11 @@ Related
 History Log
 =============
 
-- 1.15.0 -- 2020-03-07
+- 1.16.0 -- 2020-07-07
+
+    - update LightRealformRoutineTwo->processForm, add onSuccess option, and update signature
+    
+- 1.15.0 -- 2020-07-06
 
     - update LightRealformRoutineOne->processForm, now the onSuccess callback can return an http response directly
     
