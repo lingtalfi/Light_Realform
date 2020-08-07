@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.17.1 -- 2020-08-07
+
+    - rename LightRealformLateServiceRegistrationInterface->registerByIdentifier to registerRealformByIdentifier
+    
 - 1.17.0 -- 2020-08-07
 
     - add LightRealformLateServiceRegistrationInterface

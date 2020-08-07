@@ -22,5 +22,5 @@ interface LightRealformLateServiceRegistrationInterface
      * @param string $identifier
      * @return mixed
      */
-    public function registerByIdentifier(string $identifier);
+    public function registerRealformByIdentifier(string $identifier);
 }

@@ -25,7 +25,7 @@ Class synopsis
 abstract class <span class="pl-k">LightRealformLateServiceRegistrationInterface</span>  {
 
 - Methods
-    - abstract public [registerByIdentifier](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformLateServiceRegistrationInterface/registerByIdentifier.md)(string $identifier) : mixed
+    - abstract public [registerRealformByIdentifier](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformLateServiceRegistrationInterface/registerRealformByIdentifier.md)(string $identifier) : mixed
 
 }
 
@@ -37,7 +37,7 @@ abstract class <span class="pl-k">LightRealformLateServiceRegistrationInterface<
 Methods
 ==============
 
-- [LightRealformLateServiceRegistrationInterface::registerByIdentifier](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformLateServiceRegistrationInterface/registerByIdentifier.md) &ndash; Registers the plugin to the realform service.
+- [LightRealformLateServiceRegistrationInterface::registerRealformByIdentifier](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformLateServiceRegistrationInterface/registerRealformByIdentifier.md) &ndash; Registers the plugin to the realform service.
 
 
 
