@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2020-07-07
+2019-10-21 -> 2020-08-07
 
 
 
@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.17.0 -- 2020-08-07
+
+    - add LightRealformLateServiceRegistrationInterface
+    
 - 1.16.0 -- 2020-07-07
 
     - update LightRealformRoutineTwo->processForm, add onSuccess option, and update signature

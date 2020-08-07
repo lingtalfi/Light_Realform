@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealformService::setHandlers](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L160-L163)
+See the source code for method [LightRealformService::setHandlers](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L159-L162)
 
 
 See Also

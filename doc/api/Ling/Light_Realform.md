@@ -1,6 +1,6 @@
 Ling/Light_Realform
 ================
-2019-10-21 --> 2020-07-07
+2019-10-21 --> 2020-08-07
 
 
 
@@ -53,6 +53,8 @@ Table of contents
     - [LightRealformHandlerAliasHelperService::getChloroformValidator](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformHandlerAliasHelperService/getChloroformValidator.md) &ndash; Returns a configured validator instance, based on the given type and validatorConf.
     - [LightRealformHandlerAliasHelperService::getDataTransformer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformHandlerAliasHelperService/getDataTransformer.md) &ndash; Returns a configured dataTransformer instance, based on the given alias and parameters.
     - [LightRealformHandlerAliasHelperService::setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformHandlerAliasHelperService/setContainer.md) &ndash; Sets the container.
+- [LightRealformLateServiceRegistrationInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformLateServiceRegistrationInterface.md) &ndash; The LightRealformLateServiceRegistrationInterface interface.
+    - [LightRealformLateServiceRegistrationInterface::registerByIdentifier](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformLateServiceRegistrationInterface/registerByIdentifier.md) &ndash; Registers the plugin to the realform service.
 - [LightRealformService](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService.md) &ndash; The LightRealformService class.
     - [LightRealformService::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService/__construct.md) &ndash; Builds the LightRealformService instance.
     - [LightRealformService::getFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformService/getFormHandler.md) &ndash; Returns the realform handler instance corresponding to the given identifier.

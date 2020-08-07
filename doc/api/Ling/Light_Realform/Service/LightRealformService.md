@@ -4,7 +4,7 @@
 
 The LightRealformService class
 ================
-2019-10-21 --> 2020-07-07
+2019-10-21 --> 2020-08-07
 
 
 
@@ -94,4 +94,4 @@ See the source code of [Ling\Light_Realform\Service\LightRealformService](https:
 
 SeeAlso
 ==============
-Previous class: [LightRealformHandlerAliasHelperService](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformHandlerAliasHelperService.md)<br>Next class: [RealformSuccessHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface.md)<br>
+Previous class: [LightRealformLateServiceRegistrationInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Service/LightRealformLateServiceRegistrationInterface.md)<br>Next class: [RealformSuccessHandlerInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface.md)<br>
