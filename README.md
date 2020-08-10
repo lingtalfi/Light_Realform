@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2020-08-07
+2019-10-21 -> 2020-08-10
 
 
 
@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 1.18.0 -- 2020-08-10
+
+    - update BaseRealformHandler, is now generated-custom config pattern compliant
+    
 - 1.17.1 -- 2020-08-07
 
     - rename LightRealformLateServiceRegistrationInterface->registerByIdentifier to registerRealformByIdentifier

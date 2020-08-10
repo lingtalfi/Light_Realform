@@ -174,7 +174,23 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
         if (array_key_exists($id, $this->confCache)) {
             return $this->confCache[$id];
         }
-        $file = $this->confDir . "/" . $id . ".byml";
+
+        //--------------------------------------------
+        // CUSTOM FILE?
+        //--------------------------------------------
+        $file = null;
+        if (false !== strpos($id, "generated")) {
+            $custom = str_replace('generated', 'custom', $id);
+            $file = $this->confDir . "/" . $custom . ".byml";
+            if (false === file_exists($file)) {
+                $file = null;
+            }
+        }
+
+
+        if (null === $file) {
+            $file = $this->confDir . "/" . $id . ".byml";
+        }
         if (true === FileSystemTool::isDirectoryTraversalSafe($file, $this->confDir)) {
             $this->confCache[$id] = BabyYamlUtil::readFile($file);
             return $this->confCache[$id];
