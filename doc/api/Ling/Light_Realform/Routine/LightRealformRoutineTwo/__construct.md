@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealformRoutineTwo::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/Routine/LightRealformRoutineTwo.php#L74-L77)
+See the source code for method [LightRealformRoutineTwo::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/Routine/LightRealformRoutineTwo.php#L77-L80)
 
 
 See Also

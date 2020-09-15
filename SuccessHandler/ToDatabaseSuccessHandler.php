@@ -4,8 +4,10 @@
 namespace Ling\Light_Realform\SuccessHandler;
 
 
+use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Crud\Service\LightCrudService;
+use Ling\Light_Realform\Exception\LightRealformException;
 
 /**
  * The ToDatabaseSuccessHandler class.
@@ -34,15 +36,8 @@ use Ling\Light_Crud\Service\LightCrudService;
  *
  *
  */
-class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
+class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface, LightServiceContainerAwareInterface
 {
-
-    /**
-     * This property holds the table in which the data will be saved.
-     * @var string
-     */
-    protected $table;
-
 
     /**
      * This property holds the container for this instance.
@@ -51,142 +46,98 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface
     protected $container;
 
 
-    /**
-     * This property holds the pluginName for this instance.
-     * It's the name of the plugin used as a handler for the crud service.
-     *
-     * @var string
-     */
-    protected $pluginName;
-
-
-    /**
-     * This property holds the multiplier array for this instance.
-     * See more details in @page(the form multiplier trick document).
-     * @var array
-     */
-    protected $multiplier;
-
-    /**
-     * Whether to use @page(the user row restriction system).
-     * @var bool = false
-     */
-    protected $useRowRestriction;
-
+//    /**
+//     * This property holds the multiplier array for this instance.
+//     * See more details in @page(the form multiplier trick document).
+//     * @var array
+//     */
+//    protected $multiplier;
 
     /**
      * Builds the ToDatabaseSuccessHandler instance.
      */
     public function __construct()
     {
-        $this->table = null;
+
         $this->container = null;
-        $this->pluginName = null;
-        $this->multiplier = null;
-        $this->useRowRestriction = false;
+//        $this->multiplier = null;
     }
 
-
+    //--------------------------------------------
+    // LightServiceContainerAwareInterface
+    //--------------------------------------------
     /**
-     * The options used by this method are:
-     * - ?updateRic: the array of key => value pairs representing the row to update (i.e. the old row).
-     *
-     * If the updateRic key is defined in the options, then the class switches to update mode,
-     * otherwise the class assumes insert mode.
-     *
-     * See the notes in the class description for more details.
-     *
-     *
-     *
-     *
      * @implementation
-     */
-    public function processData(array $data, array $options = [])
-    {
-        /**
-         * @var $crud LightCrudService
-         */
-        $contextId = $this->pluginName . '.Light_RealForm-ToDatabaseSuccessHandler';
-        $crud = $this->container->get('crud');
-
-
-        //--------------------------------------------
-        // UPDATE
-        //--------------------------------------------
-        if (array_key_exists('updateRic', $options)) {
-            $updateRic = $options['updateRic'];
-            $crud->execute($contextId, $this->table, 'update', [
-                'data' => $data,
-                'updateRic' => $updateRic,
-                'useRowRestriction' => $this->useRowRestriction,
-            ]);
-        }
-        //--------------------------------------------
-        // INSERT
-        //--------------------------------------------
-        else {
-            $crud->execute($contextId, $this->table, 'create', [
-                'data' => $data,
-                'multiplier' => $this->multiplier,
-                'useRowRestriction' => $this->useRowRestriction,
-            ]);
-        }
-    }
-
-
-    //--------------------------------------------
-    //
-    //--------------------------------------------
-    /**
-     * Sets the container.
-     *
-     * @param LightServiceContainerInterface $container
      */
     public function setContainer(LightServiceContainerInterface $container)
     {
         $this->container = $container;
     }
 
+
+    //--------------------------------------------
+    // RealformSuccessHandlerInterface
+    //--------------------------------------------
     /**
-     * Sets the table.
-     *
-     * @param string $table
+     * @implementation
      */
-    public function setTable(string $table)
+    public function prepare(array $conf)
     {
-        $this->table = $table;
+        // we don't use any parameters for now, so...
     }
 
     /**
-     * Sets the pluginName.
-     *
-     * @param string $pluginName
+     * @implementation
      */
-    public function setPluginName(string $pluginName)
+    public function execute(array $data, array $options = [])
     {
-        $this->pluginName = $pluginName;
+        $updateRic = $options['updateRic'] ?? false;
+        $storageId = $options['storageId'] ?? null;
+
+        if (null === $storageId) {
+            $this->error("Undefined storage id.");
+        }
+
+
+        /**
+         * @var $crud LightCrudService
+         */
+        $crud = $this->container->get('crud');
+        //--------------------------------------------
+        // UPDATE
+        //--------------------------------------------
+        if (false !== $updateRic) {
+            $crud->execute($storageId, 'update', [
+                'data' => $data,
+                'updateRic' => $updateRic,
+            ]);
+        }
+        //--------------------------------------------
+        // INSERT
+        //--------------------------------------------
+        else {
+            $crud->execute($storageId, 'create', [
+                'data' => $data,
+//                'multiplier' => $this->multiplier,
+            ]);
+        }
     }
 
+
+
+
+
+    //--------------------------------------------
+    //
+    //--------------------------------------------
     /**
-     * Sets the multiplier.
-     *
-     * @param array $multiplier
+     * Throws an exception.
+     * @param string $msg
+     * @throws \Exception
      */
-    public function setMultiplier(array $multiplier)
+    private function error(string $msg)
     {
-        $this->multiplier = $multiplier;
+        throw new LightRealformException("ToDatabaseSuccessHandler: " . $msg);
     }
-
-    /**
-     * Sets the useRowRestriction.
-     *
-     * @param bool $useRowRestriction
-     */
-    public function setUseRowRestriction(bool $useRowRestriction)
-    {
-        $this->useRowRestriction = $useRowRestriction;
-    }
-
-
 
 }

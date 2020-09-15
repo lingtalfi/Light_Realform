@@ -175,6 +175,16 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
             return $this->confCache[$id];
         }
 
+
+        /**
+         * Todo: here...
+         * Todo: here...
+         * Todo: here...
+         * Todo: here...
+         */
+        az(__FILE__, $id);
+
+
         //--------------------------------------------
         // CUSTOM FILE?
         //--------------------------------------------
@@ -269,170 +279,6 @@ abstract class BaseRealformHandler implements RealformHandlerInterface, LightSer
     }
 
 
-    /**
-     * Returns a chloroform field.
-     * Note: fields from the @page(Light_ChloroformExtension plugin) also work.
-     *
-     * @param Chloroform $form
-     * @param string $type
-     * @param string $fieldId
-     * @param array $fieldConf
-     * @return FieldInterface
-     * @throws \Exception
-     */
-    protected function getChloroformField(Chloroform $form, string $type, string $fieldId, array $fieldConf = []): FieldInterface
-    {
-        $fieldConf['id'] = $fieldId;
-
-
-        switch ($type) {
-            case "ajaxFileBox":
-            case "color":
-            case "date":
-            case "datetime":
-            case "file":
-            case "hidden":
-            case "number":
-            case "string":
-            case "text":
-            case "time":
-                $class = "Ling\Chloroform\Field\\" . ucfirst($type) . "Field";
-                $field = new $class($fieldConf);
-                break;
-            case "checkbox":
-            case "radio":
-            case "select":
-                $class = "Ling\Chloroform\Field\\" . ucfirst($type) . "Field";
-                $field = new $class($fieldConf);
-                if (array_key_exists("items", $fieldConf)) {
-                    $field->setItems($fieldConf['items']);
-                }
-                break;
-            case "csrf":
-                $field = new CSRFField($fieldConf);
-                if (array_key_exists("csrfIdentifier", $fieldConf)) {
-                    $field->setCsrfIdentifier($fieldConf['csrfIdentifier']);
-                }
-                if (array_key_exists("csrfProtector", $fieldConf)) {
-                    $field->setCsrfProtector(new $fieldConf['csrfProtector']);
-                }
-                break;
-            case "password":
-                $field = new PasswordField($fieldConf);
-                $field->setForm($form);
-                break;
-            case "decorative":
-                $field = new DecorativeField($fieldConf);
-                break;
-            case "table_list":
-                $field = new TableListField($fieldConf);
-                $field->setContainer($this->container);
-                break;
-            default:
-                throw new LightRealformException("Unknown field type \"$type\" with id $fieldId.");
-                break;
-        }
-
-
-        return $field;
-    }
-
-
-    /**
-     * Returns a validator instance.
-     *
-     * @param string $type
-     * @param array $validatorConf
-     * @return ValidatorInterface
-     * @throws \Exception
-     */
-    protected function getChloroformValidator(string $type, array $validatorConf): ValidatorInterface
-    {
-        switch ($type) {
-            case "csrf":
-                $validator = new CSRFValidator();
-                if (array_key_exists("csrfProtector", $validatorConf)) {
-                    $validator->setCsrfProtector(new $validatorConf['csrfProtector']);
-                }
-                break;
-            case "fileMimeType":
-                $validator = new FileMimeTypeValidator();
-                if (array_key_exists("allowedMimeTypes", $validatorConf)) {
-                    $validator->setMimeTypes($validatorConf['allowedMimeTypes']);
-                }
-                break;
-            case "minMaxChar":
-            case "minMaxDate":
-            case "minMaxFileSize":
-            case "minMaxItem":
-            case "minMaxNumber":
-                $class = "Ling\Chloroform\Validator\\" . ucfirst($type) . "Validator";
-                $validator = new $class();
-                if (array_key_exists("min", $validatorConf)) {
-                    $validator->setMin($validatorConf['min']);
-                }
-                if (array_key_exists("max", $validatorConf)) {
-                    $validator->setMax($validatorConf['max']);
-                }
-                break;
-            case "passwordConfirm":
-                $validator = new PasswordConfirmValidator();
-                if (array_key_exists("otherFieldId", $validatorConf)) {
-                    $validator->setOtherFieldId($validatorConf['otherFieldId']);
-                }
-                break;
-            case "password":
-                $validator = new PasswordValidator();
-                if (array_key_exists("nbAlpha", $validatorConf)) {
-                    $validator->setNbAlpha($validatorConf['nbAlpha']);
-                }
-                if (array_key_exists("nbAlphaLower", $validatorConf)) {
-                    $validator->setNbAlphaLower($validatorConf['nbAlphaLower']);
-                }
-                if (array_key_exists("nbAlphaUpper", $validatorConf)) {
-                    $validator->setNbAlphaUpper($validatorConf['nbAlphaUpper']);
-                }
-                if (array_key_exists("nbDigits", $validatorConf)) {
-                    $validator->setNbDigits($validatorConf['nbDigits']);
-                }
-                if (array_key_exists("nbSpecial", $validatorConf)) {
-                    $validator->setNbSpecial($validatorConf['nbSpecial']);
-                }
-                break;
-            case "requiredDate":
-            case "required":
-                $class = "Ling\Chloroform\Validator\\" . ucfirst($type) . "Validator";
-                $validator = new $class();
-                break;
-            default:
-
-
-                /**
-                 * @var $aliasHelper LightRealformHandlerAliasHelperService
-                 */
-                $aliasHelper = $this->container->get("realform_handler_alias_helper");
-                $val = $aliasHelper->getChloroformValidator($type, $validatorConf);
-
-                if (null !== $val) {
-                    $validator = $val;
-                } else {
-                    throw new LightRealformException("Unknown validator class with type/id $type.");
-                }
-                break;
-        }
-
-
-        if (array_key_exists("errorMessage", $validatorConf)) {
-            $errMsg = $validatorConf['errorMessage'];
-            $msgIdentifier = null;
-            if (is_array($errMsg)) {
-                list($errMsg, $msgIdentifier) = $errMsg;
-            }
-            $validator->setErrorMessage($errMsg, $msgIdentifier);
-        }
-
-        return $validator;
-    }
 
 
     /**

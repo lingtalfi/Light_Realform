@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2020-08-10
+2019-10-21 -> 2020-09-15
 
 
 
@@ -70,6 +70,10 @@ Related
 History Log
 =============
 
+- 2.0.0 -- 2020-09-15
+
+    - new api
+    
 - 1.18.0 -- 2020-08-10
 
     - update BaseRealformHandler, is now generated-custom config pattern compliant

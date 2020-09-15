@@ -4,7 +4,7 @@
 
 The RealformSuccessHandlerInterface class
 ================
-2019-10-21 --> 2020-08-10
+2019-10-21 --> 2020-09-15
 
 
 
@@ -25,7 +25,8 @@ Class synopsis
 abstract class <span class="pl-k">RealformSuccessHandlerInterface</span>  {
 
 - Methods
-    - abstract public [processData](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface/processData.md)(array $data, ?array $options = []) : mixed
+    - abstract public [prepare](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface/prepare.md)(array $conf) : void
+    - abstract public [execute](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface/execute.md)(array $data, ?array $options = []) : void
 
 }
 
@@ -37,7 +38,8 @@ abstract class <span class="pl-k">RealformSuccessHandlerInterface</span>  {
 Methods
 ==============
 
-- [RealformSuccessHandlerInterface::processData](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface/processData.md) &ndash; Process the given data, and throws an exception if something unexpected happens.
+- [RealformSuccessHandlerInterface::prepare](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface/prepare.md) &ndash; Prepares the instance before calling the execute method.
+- [RealformSuccessHandlerInterface::execute](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/RealformSuccessHandlerInterface/execute.md) &ndash; Process the given data, and throws an exception if something unexpected happens.
 
 
 

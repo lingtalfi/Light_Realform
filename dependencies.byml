@@ -2,6 +2,7 @@ dependencies:
     Ling: 
         - Light
         - Light_Csrf
+        - SimplePdoWrapper
         - Chloroform
         - BabyYaml
         - Bat
@@ -9,11 +10,14 @@ dependencies:
         - Light_DatabaseInfo
         - Light_Events
         - Light_Flasher
-        - Light_UserRowRestriction
-        - SimplePdoWrapper
         - WiseTool
+        - Light_CsrfSession
         - Light_Database
         - Light_MicroPermission
+        - ArrayToString
+        - Light_Nugget
+        - Light_UserManager
+        - Light_User
         - Light_Crud
     
 
