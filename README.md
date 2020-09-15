@@ -29,9 +29,7 @@ Summary
 ===========
 - [Light_Realform api](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
 - Pages
-    - [Conception notes linear](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes-linear.md)
-    - [Conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes.md)
-    - [Realform configuration example](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/realform-config-example.md)
+    - [Conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/2020/conception-notes.md)
 
 - [Services](#services)
 - [Related](#related)
@@ -70,6 +68,10 @@ Related
 History Log
 =============
 
+- 2.0.1 -- 2020-09-15
+
+    - update links in README.md
+    
 - 2.0.0 -- 2020-09-15
 
     - new api
