@@ -54,7 +54,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [RealformDatabaseFeeder::error](https://github.com/lingtalfi/Light_Realform/blob/master/Feeder/RealformDatabaseFeeder.php#L108-L111)
+See the source code for method [RealformDatabaseFeeder::error](https://github.com/lingtalfi/Light_Realform/blob/master/Feeder/RealformDatabaseFeeder.php#L123-L126)
 
 
 See Also

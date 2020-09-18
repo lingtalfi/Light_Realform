@@ -1,6 +1,6 @@
 Light_Realform, conception notes
 ==============
-2020-09-04 -> 2020-09-15
+2020-09-04 -> 2020-09-18
 
 
 The goal of the **Light_Realform** service is to help us create any **html form**.
@@ -92,7 +92,7 @@ At the core of our system, we use the [Chloroform planet](https://github.com/lin
 
 The configuration file
 -------------
-2020-09-07 -> 2020-09-08
+2020-09-07 -> 2020-09-18
 
 
 To access the configuration file, we use the [Light_Nugget planet](https://github.com/lingtalfi/Light_Nugget), with a relative path of "Light_Realform/form".
@@ -140,7 +140,7 @@ Our directives are the following:
 
 - storage_id: string. The identifier for the storage of your application.
     This is used to check whether the user is granted the permission to use the form.
-    This is also passed as a property of the **conf** parameter of the feeder's prepare method. See the [feeder](#the-feeder) section for more details.
+    This is also passed as a parameter of the feeder's getDefaultValue method. See the [feeder](#the-feeder) section for more details.
     
     If you use our default feeder, it's assumed that you are using a database as your storage, 
     and the **storage_id** is the table name, optionally prefixed with the database name (mainly in case your application uses multiple databases).    
@@ -148,7 +148,8 @@ Our directives are the following:
     
 - form_handler: array, this basically creates and configures the chloroform instance.
     - id: string, the id of the chloroform.
-    - fields: array of fieldId => "field items", each item being an array. See more about **field id** in the chloroform documentation.
+    - fields: array of fieldId => "field items", each item being an array. See more about [field id in the chloroform documentation](https://github.com/lingtalfi/Chloroform/blob/master/doc/pages/chloroform-discussion.md#the-field-id).
+    
         Each field item is an array which is basically passed to the control instance defined by the type property, except for the **validators**
         property, which is not passed to the control instance, but used by our service instead.
         
@@ -222,12 +223,37 @@ Our directives are the following:
             - requiredDate
             - required
             
+        - multiplier: array, defines a multiplier for this field. For more info about the multiplier, see the [form multiplier trick](https://github.com/lingtalfi/TheBar/blob/master/discussions/form-multiplier.md).
+        This will only work if you use our default objects (feeder: RealformDatabaseFeeder, successHandler: ToDatabaseSuccessHandler). 
+        If not (i.e. if you use your own objects), you'll need to re-implement the multiplier trick yourself if you need it.
+         
+         The properties are:
+            - ?enabled: bool=true, set this to **false** to quickly disable the multiplier. It's enabled by default as soon as you define the multiplier property.
+            - pivot: string, the name of the pivot column (see the form multiplier trick document for more details)
+            - ?on_update_fetch_sql: string, the sql query to use, when in update mode, to fetch the default values based on the given [ric](https://github.com/lingtalfi/NotationFan/blob/master/ric.md).
+                By default, our service provides this request automatically for you, based on the value of the **pivot** and **table** properties (the table property comes from the **storage_id** directive of the configuration file), however with the **on_update_fetch_sql** property
+                you can override that default query, should you have more specific business rules.  
+                You can use {tags} corresponding to the ric columns to access the ric values.
+                For instance:
+                - select permission_id from lud_permission_group_has_permission where permission_group_id={permission_group_id}
+         As for now, the **field identifier** is used as the column name in your table (if you are using a database). This might change as concrete cases show up.
+         
+         @dev: Search for the abc.1 string in the code to remove that.       
+                
+            
+                        
+            
 - ?success_handler: array. Defines how to access and configure the **success handler**.
     - class: string, the class to instantiate. It must be an instance of our **RealformSuccessHandlerInterface**.
         If your instance implements **LightServiceContainerAwareInterface**, it will be passed the container automatically.
         The special value "defaultDbHandler" is also accepted (instead of the full class), and resolves to our **ToDatabaseSuccessHandler** class.
         
-    - params: array of parameters, which are passed to the **success handler instance** via the **prepare** method of our **RealformSuccessHandlerInterface**, if you've used the **class** property.
+    - params: array of parameters, which are passed to the **execute** method of the **success handler instance** (**RealformSuccessHandlerInterface**).
+        Our service also injects other parameters, see the [success handler section](#the-success-handler-interface) for more details.
+       
+                
+        
+        
     
 
 ### A configuration file example
@@ -324,11 +350,10 @@ success_handler:
 
 The success handler interface
 ------------
-2020-09-07 -> 2020-09-08
+2020-09-07 -> 2020-09-18
 
 Our **RealformSuccessHandlerInterface** interface has two methods:
 
-- prepare ( array conf )
 - execute ( array validPostedData, array $params = [] )
 
 It is assumed that if the **execute** method throws an exception, the exception message shall be displayed to the user as a **form notification** (see the [chloroform planet](https://github.com/lingtalfi/Chloroform) documentation for more info about **form notifications**).
@@ -336,14 +361,18 @@ It is assumed that if the **execute** method throws an exception, the exception 
 Otherwise, it means that the execution went well, and that a successful form notification shall be displayed, or the user shall be redirected, depending on how you handle your form.
 You can actually configure what to do in case of a successful handling (i.e. the **execute** method was successful) via the **executeRealform** of our service.
 
-The **conf** variable passed as an argument of the **prepare** method is the array you define in your [configuration file](#the-configuration-file) via the **success_handler.params** directive.
+The **params** variable passed as an argument of the **execute** method is the array you define in your [configuration file](#the-configuration-file) via the **success_handler.params** directive.
 
-The **params** variable passed as the second argument of the **execute** method is actually fed dynamically by our service with the following:
+We also add the following properties:
 - updateRic: array|false, the update ric. If the form is not in **update mode**, the value is false.
 - storageId: string|null, the value that you defined in the configuration file (**storage_id**), or null if not defined in your configuration.
-
-
-
+- ?multiplier: array, only passed if the multiplier property is defined and enabled in the configuration file, it contains the following:
+    - field_id: the field identifier on which the multiplier was defined
+    - pivot: same as the multiplier.pivot property from the configuration file
+    - ?on_update_fetch_sql: same as the multiplier.on_update_fetch_sql property from the configuration file
+    
+    
+    
 
 The executeRealform method
 -------------
@@ -455,7 +484,7 @@ If the **updateRic** is defined, it will be passed to the **success handler** vi
 
 The feeder
 ----------
-2020-09-07
+2020-09-07 -> 2020-09-18
 
 
 The role of the **feeder** is to provide the default values of the form, that is the values when the form is not yet posted by the user.
@@ -466,13 +495,15 @@ the feeder might try to fetch a record in your storage, or not.
 
 The **feeder** must implement our **RealformFeederInterface**, which exposes the following methods:
 
-- prepare ( conf ) 
-- getDefaultValues ()
+- getDefaultValues ( array params = [] )
 
 
-If you use the **updateRic** system, the updateRic is passed as a property of the **conf** argument of the **prepare** method.
+If you use the **updateRic** system, the updateRic is passed as a parameter of the **getDefaultValue** method.
 
+The **storage_id** property is also passed as a parameter (of the **getDefaultValue** method).
 
+If one of your field has the multiplier option (see the [configuration file](#the-configuration-file) section for more details),
+then the **multiplier** property is also passed as a parameter.
  
 
 

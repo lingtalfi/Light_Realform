@@ -67,7 +67,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealformService::getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L293-L348)
+See the source code for method [LightRealformService::getChloroformField](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L307-L362)
 
 
 See Also

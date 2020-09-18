@@ -53,7 +53,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealformService::registerFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L190-L193)
+See the source code for method [LightRealformService::registerFormHandler](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L204-L207)
 
 
 See Also

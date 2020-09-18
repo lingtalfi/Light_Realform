@@ -16,7 +16,7 @@ Description
 ================
 
 
-abstract public [RealformFeederInterface::getDefaultValues](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface/getDefaultValues.md)() : array
+abstract public [RealformFeederInterface::getDefaultValues](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface/getDefaultValues.md)(?array $params = []) : array
 
 
 
@@ -29,7 +29,10 @@ Returns the default values of the form.
 Parameters
 ================
 
-This method has no parameters.
+
+- params
+
+    
 
 
 Return values
@@ -46,7 +49,7 @@ Returns array.
 
 Source Code
 ===========
-See the source code for method [RealformFeederInterface::getDefaultValues](https://github.com/lingtalfi/Light_Realform/blob/master/Feeder/RealformFeederInterface.php#L25-L25)
+See the source code for method [RealformFeederInterface::getDefaultValues](https://github.com/lingtalfi/Light_Realform/blob/master/Feeder/RealformFeederInterface.php#L18-L18)
 
 
 See Also
@@ -54,5 +57,5 @@ See Also
 
 The [RealformFeederInterface](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface.md) class.
 
-Previous method: [prepare](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface/prepare.md)<br>
+
 

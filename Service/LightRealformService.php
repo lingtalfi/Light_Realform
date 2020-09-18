@@ -3,7 +3,6 @@
 
 namespace Ling\Light_Realform\Service;
 
-use Ling\ArrayToString\ArrayToStringTool;
 use Ling\Bat\ArrayTool;
 use Ling\Bat\SmartCodeTool;
 use Ling\Bat\StringTool;
@@ -138,6 +137,11 @@ class LightRealformService
         });
 
 
+        // multipliers
+        //--------------------------------------------
+        $multipliers = [];
+
+
         // adding fields
         //--------------------------------------------
         if (array_key_exists("fields", $formConf)) {
@@ -159,6 +163,15 @@ class LightRealformService
                 $instance->addField($field, $validators);
 
 
+                if (array_key_exists('multiplier', $fieldConf)) {
+                    $multiConf = $fieldConf['multiplier'];
+                    $enabled = $multiConf['enabled'] ?? true;
+                    if (true === $enabled) {
+                        unset($multiConf['enabled']);
+                        $multipliers[$identifier] = $multiConf;
+                    }
+                }
+
                 // deprecated: use js to convert the data directly instead, see conception notes for more details
 //                if (array_key_exists('dataTransformer', $fieldConf)) {
 //                    $dataTransformerValue = $fieldConf['dataTransformer'];
@@ -174,6 +187,7 @@ class LightRealformService
         // EXECUTING "Form handling system A"
         //--------------------------------------------
         $realformResult->setChloroform($instance);
+        $options['multipliers'] = $multipliers;
         $this->handleFormSystemA($nugget, $realformResult, $instance, $options);
 
 
@@ -511,6 +525,13 @@ class LightRealformService
      *
      * Available options are:
      *
+     * - multipliers: array of identifier => multiplierConf. Each multiplierConf item is an array representing the
+     *      multiplier conf, as defined in @page(the configuration file section of the Light_Realform conception notes),
+     *      but without the enabled property (which value is assumed true).
+     *
+     *
+     *
+     * Deprecated options...
      * - iframeSignal; an @page(iframe signal) to use instead of the default success handler
      * - onSuccess: a success callback to trigger when the form was successfully posted (in addition to the
      *      success handler defined in the configuration). This applies only if the iframeSignal is not set
@@ -539,6 +560,22 @@ class LightRealformService
          */
         $ric = $nugget['ric'] ?? false;
         $storageId = $nugget['storage_id'];
+        $multipliers = $options['multipliers'] ?? [];
+        $multiplier = null;
+
+        /**
+         * Note: by definition we can only have one multiplier per form.
+         */
+        if ($multipliers) {
+            foreach ($multipliers as $fieldId => $multiItem) {
+                $multiItem['field_id'] = $fieldId;
+                $multiplier = $multiItem;
+                break;
+
+            }
+        }
+
+
         $formId = $form->getFormId();
 
         //--------------------------------------------
@@ -559,7 +596,6 @@ class LightRealformService
         }
 
 
-
         //--------------------------------------------
         // FORM & SECURITY CHECK ONE: THE RECOMMENDED MICRO-PERMS
         //--------------------------------------------
@@ -575,7 +611,6 @@ class LightRealformService
             $form->setMode("insert");
             $mp->checkMicroPermission("store.$storageId.create");
         }
-
 
 
         //--------------------------------------------
@@ -599,16 +634,13 @@ class LightRealformService
         }
 
 
-
-
-
-
+        //--------------------------------------------
+        // FORM ALGORITHM
+        //--------------------------------------------
         /**
          * @var $flasher LightFlasherService
          */
         $flasher = $this->container->get('flasher');
-
-
         if (true === $executeFormAlgo) {
 
 
@@ -636,7 +668,9 @@ class LightRealformService
                         // DO WE USE A SUCCESS HANDLER FROM THE CONF?
                         //--------------------------------------------
                         $successHandlerConf = $nugget['success_handler'] ?? [];
-                        $params = $successHandlerConf['params'] ?? [];
+                        $successOptions = $successHandlerConf['params'] ?? [];
+
+
                         $successHandler = null;
                         if (array_key_exists('class', $successHandlerConf)) {
                             $className = $successHandlerConf['class'];
@@ -656,7 +690,6 @@ class LightRealformService
                             }
 
 
-                            $successHandler->prepare($params);
                         }
 
 
@@ -667,6 +700,10 @@ class LightRealformService
                             if (true === $isUpdate) {
                                 $successOptions["updateRic"] = $updateRic;
                             }
+                            if ($multiplier) {
+                                $successOptions['multiplier'] = $multiplier;
+                            }
+
                             $successHandler->execute($data, $successOptions);
                         }
 
@@ -786,8 +823,12 @@ class LightRealformService
                     if (true === $isUpdate) {
                         $feederParams['updateRic'] = $updateRic;
                     }
-                    $feeder->prepare($feederParams);
-                    $defaultValues = $feeder->getDefaultValues();
+
+                    if (null !== $multiplier) {
+                        $feederParams['multiplier'] = $multiplier;
+                    }
+
+                    $defaultValues = $feeder->getDefaultValues($feederParams);
                     $form->injectValues($defaultValues);
                 }
 

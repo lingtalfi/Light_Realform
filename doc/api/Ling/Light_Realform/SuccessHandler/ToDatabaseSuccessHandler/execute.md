@@ -30,6 +30,7 @@ Available options are:
 - updateRic: array|false=false, see [the updateRic definition in the Light_Realform conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/2020/conception-notes.md#the-updateric-concept) for more details.
      It's false if the form is not in update mode.
 - storageId: string=null, the storage id that you defined in your configuration file.
+- multiplier: array, the multiplier configuration. See [the multiplier directive in the configuration file of the Light_Realform conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/2020/conception-notes.md#the-configuration-file) for more details.
 - ...or you can add your own options
 
 
@@ -67,7 +68,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [ToDatabaseSuccessHandler::execute](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L92-L124)
+See the source code for method [ToDatabaseSuccessHandler::execute](https://github.com/lingtalfi/Light_Realform/blob/master/SuccessHandler/ToDatabaseSuccessHandler.php#L77-L111)
 
 
 See Also
@@ -75,5 +76,5 @@ See Also
 
 The [ToDatabaseSuccessHandler](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler.md) class.
 
-Previous method: [prepare](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/prepare.md)<br>Next method: [error](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/error.md)<br>
+Previous method: [setContainer](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/setContainer.md)<br>Next method: [error](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/SuccessHandler/ToDatabaseSuccessHandler/error.md)<br>
 

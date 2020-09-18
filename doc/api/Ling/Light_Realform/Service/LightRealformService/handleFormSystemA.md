@@ -49,6 +49,13 @@ Errors and success messages are handled using the [flash service](https://github
 
 Available options are:
 
+- multipliers: array of identifier => multiplierConf. Each multiplierConf item is an array representing the
+     multiplier conf, as defined in [the configuration file section of the Light_Realform conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/2020/conception-notes.md#the-configuration-file),
+     but without the enabled property (which value is assumed true).
+
+
+
+Deprecated options...
 - iframeSignal; an [iframe signal](https://github.com/lingtalfi/TheBar/blob/master/discussions/iframe-signal.md) to use instead of the default success handler
 - onSuccess: a success callback to trigger when the form was successfully posted (in addition to the
      success handler defined in the configuration). This applies only if the iframeSignal is not set
@@ -96,7 +103,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightRealformService::handleFormSystemA](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L528-L805)
+See the source code for method [LightRealformService::handleFormSystemA](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L549-L846)
 
 
 See Also

@@ -11,16 +11,9 @@ interface RealformFeederInterface
 
 
     /**
-     * Prepares the feeder instance.
-     *
-     * @param array $conf
-     */
-    public function prepare(array $conf): void;
-
-
-    /**
      * Returns the default values of the form.
+     * @param array $params
      * @return array
      */
-    public function getDefaultValues(): array;
+    public function getDefaultValues(array $params = []): array;
 }

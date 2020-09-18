@@ -8,24 +8,13 @@ use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Realform\Exception\LightRealformException;
 use Ling\SimplePdoWrapper\SimplePdoWrapper;
 use Ling\SimplePdoWrapper\SimplePdoWrapperInterface;
+use Ling\SimplePdoWrapper\Util\Where;
 
 /**
  * The RealformDatabaseFeeder class.
  */
 class RealformDatabaseFeeder implements RealformFeederInterface, LightServiceContainerAwareInterface
 {
-
-    /**
-     * This property holds the updateRic for this instance.
-     * @var array
-     */
-    protected $updateRic;
-
-    /**
-     * This property holds the table for this instance.
-     * @var string
-     */
-    protected $table;
 
 
     /**
@@ -40,8 +29,6 @@ class RealformDatabaseFeeder implements RealformFeederInterface, LightServiceCon
      */
     public function __construct()
     {
-        $this->updateRic = null;
-        $this->table = null;
         $this->container = null;
     }
 
@@ -63,34 +50,62 @@ class RealformDatabaseFeeder implements RealformFeederInterface, LightServiceCon
     /**
      * @implementation
      */
-    public function prepare(array $conf): void
+    public function getDefaultValues(array $params = []): array
     {
-        $this->updateRic = $conf['updateRic'] ?? null;
-        if (false === array_key_exists("storage_id", $conf)) {
+        $updateRic = $params['updateRic'] ?? null;
+        if (false === array_key_exists("storage_id", $params)) {
             $this->error("storage_id parameter is mandatory.");
         }
-        $this->table = $conf['storage_id'];
-    }
+        $table = $params['storage_id'];
+        $multiplier = $params['multiplier'] ?? null;
 
-    /**
-     * @implementation
-     */
-    public function getDefaultValues(): array
-    {
+
         $ret = [];
-        if (null !== $this->updateRic) {
+        if (null !== $updateRic) {
             /**
              * @var $db SimplePdoWrapperInterface
              */
             $db = $this->container->get("database");
-            $query = "select * from `$this->table`";
+            $query = "select * from `$table`";
             $markers = [];
-            SimplePdoWrapper::addWhereSubStmt($query, $markers, $this->updateRic);
+            SimplePdoWrapper::addWhereSubStmt($query, $markers, $updateRic);
             $row = $db->fetch($query, $markers);
 
             if (false !== $row) {
                 $ret = $row;
             }
+
+            if (null !== $multiplier) {
+
+
+                $fieldIdentifier = $multiplier['field_id'];
+                $onUpdateFetchSql = $multiplier['on_update_fetch_sql'] ?? null;
+                $pivot = $multiplier['pivot'];
+
+                if (null !== $onUpdateFetchSql) {
+                    $this->error("Not implemented yet.");
+                    $rows = $db->fetchAll($onUpdateFetchSql, $markers, \PDO::FETCH_COLUMN);
+                } else {
+                    /**
+                     * abc.1
+                     */
+                    $query = "select $fieldIdentifier from $table";
+                    if (false === array_key_exists($pivot, $updateRic)) {
+                        $this->error("The updateRic doesn't contain the \"$pivot\" property.");
+                    }
+
+                    $markers = [];
+                    SimplePdoWrapper::addWhereSubStmt($query, $markers, Where::inst()->key($pivot)->equals($updateRic[$pivot]));
+                    $rows = $db->fetchAll($query, $markers, \PDO::FETCH_COLUMN);
+
+                }
+
+                $ret[$fieldIdentifier] = $rows;
+
+
+            }
+
+
         }
         return $ret;
     }

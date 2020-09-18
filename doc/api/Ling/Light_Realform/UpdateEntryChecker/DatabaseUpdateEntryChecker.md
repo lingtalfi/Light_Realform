@@ -4,7 +4,7 @@
 
 The DatabaseUpdateEntryChecker class
 ================
-2019-10-21 --> 2020-09-15
+2019-10-21 --> 2020-09-18
 
 
 

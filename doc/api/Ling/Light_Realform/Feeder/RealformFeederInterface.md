@@ -4,7 +4,7 @@
 
 The RealformFeederInterface class
 ================
-2019-10-21 --> 2020-09-15
+2019-10-21 --> 2020-09-18
 
 
 
@@ -25,8 +25,7 @@ Class synopsis
 abstract class <span class="pl-k">RealformFeederInterface</span>  {
 
 - Methods
-    - abstract public [prepare](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface/prepare.md)(array $conf) : void
-    - abstract public [getDefaultValues](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface/getDefaultValues.md)() : array
+    - abstract public [getDefaultValues](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface/getDefaultValues.md)(?array $params = []) : array
 
 }
 
@@ -38,7 +37,6 @@ abstract class <span class="pl-k">RealformFeederInterface</span>  {
 Methods
 ==============
 
-- [RealformFeederInterface::prepare](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface/prepare.md) &ndash; Prepares the feeder instance.
 - [RealformFeederInterface::getDefaultValues](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform/Feeder/RealformFeederInterface/getDefaultValues.md) &ndash; Returns the default values of the form.
 
 

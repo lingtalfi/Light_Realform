@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2020-09-15
+2019-10-21 -> 2020-09-18
 
 
 
@@ -68,6 +68,10 @@ Related
 History Log
 =============
 
+- 2.0.2 -- 2020-09-18
+
+    - implementation of the form multiplier trick
+    
 - 2.0.1 -- 2020-09-15
 
     - update links in README.md

@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightRealformService::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L78-L83)
+See the source code for method [LightRealformService::__construct](https://github.com/lingtalfi/Light_Realform/blob/master/Service/LightRealformService.php#L77-L82)
 
 
 See Also

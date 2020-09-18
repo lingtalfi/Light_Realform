@@ -46,13 +46,6 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface, Light
     protected $container;
 
 
-//    /**
-//     * This property holds the multiplier array for this instance.
-//     * See more details in @page(the form multiplier trick document).
-//     * @var array
-//     */
-//    protected $multiplier;
-
     /**
      * Builds the ToDatabaseSuccessHandler instance.
      */
@@ -60,7 +53,6 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface, Light
     {
 
         $this->container = null;
-//        $this->multiplier = null;
     }
 
     //--------------------------------------------
@@ -78,13 +70,6 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface, Light
     //--------------------------------------------
     // RealformSuccessHandlerInterface
     //--------------------------------------------
-    /**
-     * @implementation
-     */
-    public function prepare(array $conf)
-    {
-        // we don't use any parameters for now, so...
-    }
 
     /**
      * @implementation
@@ -93,6 +78,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface, Light
     {
         $updateRic = $options['updateRic'] ?? false;
         $storageId = $options['storageId'] ?? null;
+        $multiplier = $options['multiplier']??null;
 
         if (null === $storageId) {
             $this->error("Undefined storage id.");
@@ -110,6 +96,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface, Light
             $crud->execute($storageId, 'update', [
                 'data' => $data,
                 'updateRic' => $updateRic,
+                'multiplier' => $multiplier,
             ]);
         }
         //--------------------------------------------
@@ -118,7 +105,7 @@ class ToDatabaseSuccessHandler implements RealformSuccessHandlerInterface, Light
         else {
             $crud->execute($storageId, 'create', [
                 'data' => $data,
-//                'multiplier' => $this->multiplier,
+                'multiplier' => $multiplier,
             ]);
         }
     }
