@@ -6,7 +6,6 @@ namespace Ling\Light_Realform\Routine;
 
 use Ling\Bat\ArrayTool;
 use Ling\Bat\StringTool;
-use Ling\Chloroform\Field\CSRFField;
 use Ling\Chloroform\Field\HiddenField;
 use Ling\Chloroform\Form\Chloroform;
 use Ling\Chloroform\FormNotification\ErrorFormNotification;
@@ -154,11 +153,11 @@ class LightRealformRoutineTwo
              */
             $rf = $this->container->get("realform");
             // we will use this rf handler as a tool to access the raw configuration...
-            $rfHandler = $rf->getFormHandler($realformIdentifier);
+
 
             // ...but now we will tweak that configuration for each item, to add
             // our "_$number" suffixes for each field
-            $conf = $rfHandler->getConfiguration();
+            $conf = $rf->getNugget($realformIdentifier);
             $confFormHandler = $conf['form_handler'];
 
 
@@ -245,13 +244,20 @@ class LightRealformRoutineTwo
             $csrf = $this->container->get("csrf_session");
 
 
+            $ourConf["chloroform"]['fields'] = $ourFields;
+            $extraInfo = [];
+            $form = $rf->getChloroformByConfiguration($ourConf, $extraInfo);
 
-            $ourConf["form_handler"]['fields'] = $ourFields;
-            $form = $rfHandler->getFormHandler($ourConf);
+
+            /**
+             * Note implemented yet, todo...
+             */
+            $multipliers = $extraInfo['multipliers'];
+
+
             $form->setCssId($formCssId);
             $form->setMode("update");
             $form->addField(HiddenField::create("csrf_token", ['value' => $csrf->getToken()]));
-
 
 
             // adding multiple edit checkbox share behaviour
@@ -274,9 +280,6 @@ class LightRealformRoutineTwo
             // Posting the form and validating data
             //--------------------------------------------
             if (true === $form->isPosted()) {
-
-
-
 
 
                 if (true === $form->validates()) {

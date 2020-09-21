@@ -31,7 +31,6 @@ use Ling\Light_Realform\DynamicInjection\RealformDynamicInjectionHandlerInterfac
 use Ling\Light_Realform\Exception\LightRealformException;
 use Ling\Light_Realform\Feeder\RealformDatabaseFeeder;
 use Ling\Light_Realform\Feeder\RealformFeederInterface;
-use Ling\Light_Realform\Handler\RealformHandlerInterface;
 use Ling\Light_Realform\Result\RealformResult;
 use Ling\Light_Realform\SuccessHandler\RealformSuccessHandlerInterface;
 use Ling\Light_Realform\SuccessHandler\ToDatabaseSuccessHandler;
@@ -45,13 +44,6 @@ use Ling\WiseTool\WiseTool;
 class LightRealformService
 {
 
-
-    /**
-     * This property holds the handlers for this instance.
-     * It's an array of pluginName => RealformHandlerInterface
-     * @var RealformHandlerInterface[]
-     */
-    protected $handlers;
 
     /**
      * This property holds the container for this instance.
@@ -76,47 +68,52 @@ class LightRealformService
      */
     public function __construct()
     {
-        $this->handlers = [];
         $this->dynamicInjectionHandlers = [];
         $this->container = null;
     }
 
 
     /**
-     * Creates the chloroform from the config nugget identified by the given nuggetId,
-     * then execute our @page(form handling system a algorithm), and returns the chloroform
-     * instance.
-     *
-     *
-     * More info in the @page(Light_Realform conception notes).
-     *
-     *
-     * Available options are:
-     * - onSuccess: callable (array validPostedData).
-     *      See more info in the @page(Light_Realform conception notes, the executeRealform method section).
-     *
-     *
+     * Returns the configuration nugget based on the given nuggetId.
      *
      * @param string $nuggetId
-     * @param array $options
-     * @return RealformResult
-     * @throws \Exception
+     * @return array
      */
-    public function executeRealform(string $nuggetId, array $options = []): RealformResult
+    public function getNugget(string $nuggetId): array
     {
-
-        $realformResult = new RealformResult();
-
         /**
          * @var $nug LightNuggetService
          */
         $nug = $this->container->get("nugget");
-        $nugget = $nug->getNugget($nuggetId, "Light_Realform/form");
+        return $nug->getNugget($nuggetId, "Light_Realform/form");
+    }
 
-        $formConf = $nugget['chloroform'] ?? [];
-        $formId = $formConf['id'] ?? 'formid-' . $nuggetId;
+
+    /**
+     * Returns the chloroform instance based on the given configuration.
+     * The chloroform.fields defined in the configuration will ba added to the form instance.
+     *
+     * More info in the @page(Light_Realform conception notes).
+     *
+     * The extraInfo array will contain the following after this method execution:
+     * - multipliers: array of field_identifier => multiplier conf
+     *      (remember that there should be only one multiplier per form, but here we are just returning
+     *      every multiplier defined).
+     *
+     *
+     *
+     * @param array $formConf
+     * @param array $extraInfo
+     * @return Chloroform
+     */
+    public function getChloroformByConfiguration(array $formConf, array &$extraInfo = []): Chloroform
+    {
         $instance = new Chloroform();
-        $instance->setFormId($formId);
+
+        $formId = $formConf['id'] ?? null;
+        if (null !== $formId) {
+            $instance->setFormId($formId);
+        }
 
 
         //--------------------------------------------
@@ -177,34 +174,61 @@ class LightRealformService
 //                    $dataTransformerValue = $fieldConf['dataTransformer'];
 //                    $field->setDataTransformer($this->getDataTransformer($dataTransformerValue));
 //                }
-
-
             }
         }
 
+
+        $extraInfo['multipliers'] = $multipliers;
+        return $instance;
+
+    }
+
+    /**
+     * Creates the chloroform from the config nugget identified by the given nuggetId,
+     * then execute our @page(form handling system a algorithm), and returns the chloroform
+     * instance.
+     *
+     *
+     * More info in the @page(Light_Realform conception notes).
+     *
+     *
+     * Available options are:
+     * - onSuccess: callable (array validPostedData).
+     *      See more info in the @page(Light_Realform conception notes, the executeRealform method section).
+     *
+     *
+     *
+     * @param string $nuggetId
+     * @param array $options
+     * @return RealformResult
+     * @throws \Exception
+     */
+    public function executeRealform(string $nuggetId, array $options = []): RealformResult
+    {
+
+        $realformResult = new RealformResult();
+
+        $nugget = $this->getNugget($nuggetId);
+
+
+        $formConf = $nugget['chloroform'] ?? [];
+        $formId = $formConf['id'] ?? 'formid-' . $nuggetId;
+
+        $extraInfo = [];
+        $instance = $this->getChloroformByConfiguration($formConf, $extraInfo);
+        $instance->setFormId($formId);
 
         //--------------------------------------------
         // EXECUTING "Form handling system A"
         //--------------------------------------------
         $realformResult->setChloroform($instance);
-        $options['multipliers'] = $multipliers;
+        $options['multipliers'] = $extraInfo['multipliers'];
         $this->handleFormSystemA($nugget, $realformResult, $instance, $options);
 
 
         return $realformResult;
     }
 
-
-    /**
-     * Registers a realform handler.
-     *
-     * @param string $pluginName
-     * @param RealformHandlerInterface $formHandler
-     */
-    public function registerFormHandler(string $pluginName, RealformHandlerInterface $formHandler)
-    {
-        $this->handlers[$pluginName] = $formHandler;
-    }
 
     /**
      * Registers a @page(dynamic injection handler).
@@ -274,19 +298,6 @@ class LightRealformService
     }
 
 
-
-    //--------------------------------------------
-    //
-    //--------------------------------------------
-    /**
-     * Sets the handlers.
-     *
-     * @param RealformHandlerInterface[] $handlers
-     */
-    public function setHandlers(array $handlers)
-    {
-        $this->handlers = $handlers;
-    }
 
 
     //--------------------------------------------
@@ -667,45 +678,14 @@ class LightRealformService
                         //--------------------------------------------
                         // DO WE USE A SUCCESS HANDLER FROM THE CONF?
                         //--------------------------------------------
-                        $successHandlerConf = $nugget['success_handler'] ?? [];
-                        $successOptions = $successHandlerConf['params'] ?? [];
-
-
-                        $successHandler = null;
-                        if (array_key_exists('class', $successHandlerConf)) {
-                            $className = $successHandlerConf['class'];
-                            if ('defaultDbHandler' === $className) {
-                                $successHandler = new ToDatabaseSuccessHandler();
-                            } else {
-                                $successHandler = new $successHandlerConf['class'];
-                            }
-
-
-                            if (false === $successHandler instanceof RealformSuccessHandlerInterface) {
-                                $type = gettype($successHandler);
-                                $this->error("The success handler instance must be an instance of RealformSuccessHandlerInterface, $type given.");
-                            }
-                            if ($successHandler instanceof LightServiceContainerAwareInterface) {
-                                $successHandler->setContainer($this->container);
-                            }
-
-
+                        $successOptions = [];
+                        if (true === $isUpdate) {
+                            $successOptions['updateRic'] = $updateRic;
                         }
-
-
-                        if (null !== $successHandler) {
-                            $successOptions = [
-                                "storageId" => $nugget['storage_id'] ?? null,
-                            ];
-                            if (true === $isUpdate) {
-                                $successOptions["updateRic"] = $updateRic;
-                            }
-                            if ($multiplier) {
-                                $successOptions['multiplier'] = $multiplier;
-                            }
-
-                            $successHandler->execute($data, $successOptions);
+                        if ($multiplier) {
+                            $successOptions['multiplier'] = $multiplier;
                         }
+                        $this->executeSuccessHandler($nugget, $data, $successOptions);
 
 
                     } catch (\Exception $e) {
@@ -799,38 +779,14 @@ class LightRealformService
                 //--------------------------------------------
                 // DEFAULT VALUES
                 //--------------------------------------------
-                $feeder = $nugget['feeder'] ?? null;
-                if (false !== $feeder) {
-                    if (null === $feeder) {
-                        $feeder = new RealformDatabaseFeeder();
-                    } else {
-                        $feeder = new $feeder();
-                    }
-                    if ($feeder instanceof LightServiceContainerAwareInterface) {
-                        $feeder->setContainer($this->container);
-                    }
-
-
-                    if (false === $feeder instanceof RealformFeederInterface) {
-                        $type = gettype($feeder);
-                        $this->error("The feeder instance must be a RealformFeederInterface, $type passed.");
-                    }
-
-                    $feederParams = [];
-                    if (array_key_exists("storage_id", $nugget)) {
-                        $feederParams['storage_id'] = $nugget["storage_id"];
-                    }
-                    if (true === $isUpdate) {
-                        $feederParams['updateRic'] = $updateRic;
-                    }
-
-                    if (null !== $multiplier) {
-                        $feederParams['multiplier'] = $multiplier;
-                    }
-
-                    $defaultValues = $feeder->getDefaultValues($feederParams);
-                    $form->injectValues($defaultValues);
+                $feederOptions = [];
+                if ($multiplier) {
+                    $feederOptions['multiplier'] = $multiplier;
                 }
+                if (true === $isUpdate) {
+                    $feederOptions['updateRic'] = $updateRic;
+                }
+                $this->injectDefaultValues($nugget, $form, $feederOptions);
 
 
                 if ($flasher->hasFlash($formId)) {
@@ -846,6 +802,113 @@ class LightRealformService
     }
 
 
+    /**
+     * Executes the success handler defined in the given nugget.
+     *
+     * Available options are:
+     *
+     * - multiplier: the multiplier (if any) for this form. See the **handleFormSystemA** method of this class for more details
+     * - updateRic: array, the updateRic values; only useful if the form is in update mode
+     *
+     *
+     * @param array $nugget
+     * @param array $data
+     * @param array $options
+     * @throws \Exception
+     */
+    public function executeSuccessHandler(array $nugget, array $data, array $options = [])
+    {
+
+        $successHandlerConf = $nugget['success_handler'] ?? [];
+
+
+        $successHandler = null;
+        if (array_key_exists('class', $successHandlerConf)) {
+            $className = $successHandlerConf['class'];
+            if ('defaultDbHandler' === $className) {
+                $successHandler = new ToDatabaseSuccessHandler();
+            } else {
+                $successHandler = new $successHandlerConf['class'];
+            }
+
+
+            if (false === $successHandler instanceof RealformSuccessHandlerInterface) {
+                $type = gettype($successHandler);
+                $this->error("The success handler instance must be an instance of RealformSuccessHandlerInterface, $type given.");
+            }
+            if ($successHandler instanceof LightServiceContainerAwareInterface) {
+                $successHandler->setContainer($this->container);
+            }
+
+
+        }
+
+
+        if (null !== $successHandler) {
+            $successOptions = $successHandlerConf['params'] ?? [];
+            $successOptions = array_merge($successOptions, [
+                "storageId" => $nugget['storage_id'] ?? null,
+            ]);
+
+            if (array_key_exists("updateRic", $options)) {
+                $successOptions["updateRic"] = $options['updateRic'];
+            }
+
+            if (array_key_exists("multiplier", $options)) {
+                $successOptions["multiplier"] = $options['multiplier'];
+            }
+            $successHandler->execute($data, $successOptions);
+        }
+    }
+
+
+    /**
+     * Injects the default values into the given form, based on the given nugget.
+     *
+     * Available options are:
+     * - ?updateRic: array, the update ric (only if the form is in update mode)
+     * - multiplier: array, the multiplier. See more in @page(the configuration file section of the Light_Realform conception notes)
+     *
+     *
+     * @param array $nugget
+     * @param Chloroform $form
+     * @param array $options
+     * @throws \Exception
+     */
+    public function injectDefaultValues(array $nugget, Chloroform $form, array $options = [])
+    {
+        $feeder = $nugget['feeder'] ?? null;
+        if (false !== $feeder) {
+            if (null === $feeder) {
+                $feeder = new RealformDatabaseFeeder();
+            } else {
+                $feeder = new $feeder();
+            }
+            if ($feeder instanceof LightServiceContainerAwareInterface) {
+                $feeder->setContainer($this->container);
+            }
+
+
+            if (false === $feeder instanceof RealformFeederInterface) {
+                $type = gettype($feeder);
+                $this->error("The feeder instance must be a RealformFeederInterface, $type passed.");
+            }
+
+            $feederParams = [];
+            if (array_key_exists("storage_id", $nugget)) {
+                $feederParams['storage_id'] = $nugget["storage_id"];
+            }
+            if (array_key_exists('updateRic', $options)) {
+                $feederParams['updateRic'] = $options['updateRic'];
+            }
+            if (array_key_exists('multiplier', $options)) {
+                $feederParams['multiplier'] = $options['multiplier'];
+            }
+
+            $defaultValues = $feeder->getDefaultValues($feederParams);
+            $form->injectValues($defaultValues);
+        }
+    }
 
 
     //--------------------------------------------

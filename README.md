@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2020-09-18
+2019-10-21 -> 2020-09-21
 
 
 
@@ -67,6 +67,10 @@ Related
 
 History Log
 =============
+
+- 2.0.3 -- 2020-09-21
+
+    - add service's executeSuccessHandler and injectDefaultValues methods
 
 - 2.0.2 -- 2020-09-18
 

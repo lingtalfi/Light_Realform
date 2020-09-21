@@ -4,9 +4,7 @@ dependencies:
         - Light_Csrf
         - SimplePdoWrapper
         - Chloroform
-        - BabyYaml
         - Bat
-        - Light_ChloroformExtension
         - Light_DatabaseInfo
         - Light_Events
         - Light_Flasher
@@ -14,6 +12,7 @@ dependencies:
         - Light_CsrfSession
         - Light_Database
         - Light_MicroPermission
+        - Light_ChloroformExtension
         - Light_Nugget
         - Light_UserManager
         - Light_User
