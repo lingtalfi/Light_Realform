@@ -90,26 +90,35 @@ class LightRealformService
 
 
     /**
+     * Returns the configuration nugget value based on the given nuggetDirectiveId.
+     *
+     * @param string $nuggetDirectiveId
+     * @return array
+     */
+    public function getNuggetDirective(string $nuggetDirectiveId): array
+    {
+        /**
+         * @var $nug LightNuggetService
+         */
+        $nug = $this->container->get("nugget");
+        return $nug->getNuggetDirective($nuggetDirectiveId, "Light_Realform/form");
+    }
+
+
+    /**
      * Returns the chloroform instance based on the given configuration.
-     * The chloroform.fields defined in the configuration will ba added to the form instance.
+     * The fields defined in the configuration will ba added to the form instance.
      *
      * More info in the @page(Light_Realform conception notes).
-     *
-     * The extraInfo array will contain the following after this method execution:
-     * - multipliers: array of field_identifier => multiplier conf
-     *      (remember that there should be only one multiplier per form, but here we are just returning
-     *      every multiplier defined).
      *
      *
      *
      * @param array $formConf
-     * @param array $extraInfo
      * @return Chloroform
      */
-    public function getChloroformByConfiguration(array $formConf, array &$extraInfo = []): Chloroform
+    public function getChloroformByConfiguration(array $formConf): Chloroform
     {
         $instance = new Chloroform();
-
         $formId = $formConf['id'] ?? null;
         if (null !== $formId) {
             $instance->setFormId($formId);
@@ -134,11 +143,6 @@ class LightRealformService
         });
 
 
-        // multipliers
-        //--------------------------------------------
-        $multipliers = [];
-
-
         // adding fields
         //--------------------------------------------
         if (array_key_exists("fields", $formConf)) {
@@ -159,16 +163,6 @@ class LightRealformService
                 }
                 $instance->addField($field, $validators);
 
-
-                if (array_key_exists('multiplier', $fieldConf)) {
-                    $multiConf = $fieldConf['multiplier'];
-                    $enabled = $multiConf['enabled'] ?? true;
-                    if (true === $enabled) {
-                        unset($multiConf['enabled']);
-                        $multipliers[$identifier] = $multiConf;
-                    }
-                }
-
                 // deprecated: use js to convert the data directly instead, see conception notes for more details
 //                if (array_key_exists('dataTransformer', $fieldConf)) {
 //                    $dataTransformerValue = $fieldConf['dataTransformer'];
@@ -177,8 +171,6 @@ class LightRealformService
             }
         }
 
-
-        $extraInfo['multipliers'] = $multipliers;
         return $instance;
 
     }
@@ -209,21 +201,19 @@ class LightRealformService
         $realformResult = new RealformResult();
 
         $nugget = $this->getNugget($nuggetId);
+        $realformResult->setNugget($nugget);
 
 
         $formConf = $nugget['chloroform'] ?? [];
         $formId = $formConf['id'] ?? 'formid-' . $nuggetId;
 
-        $extraInfo = [];
-        $instance = $this->getChloroformByConfiguration($formConf, $extraInfo);
+        $instance = $this->getChloroformByConfiguration($formConf);
         $instance->setFormId($formId);
-
         //--------------------------------------------
         // EXECUTING "Form handling system A"
         //--------------------------------------------
         $realformResult->setChloroform($instance);
-        $options['multipliers'] = $extraInfo['multipliers'];
-        $this->handleFormSystemA($nugget, $realformResult, $instance, $options);
+        $this->handleFormSystemA($nugget, $realformResult, $instance);
 
 
         return $realformResult;
@@ -508,45 +498,9 @@ class LightRealformService
 
 
     /**
-     * Applies a standard routine to the form identified by the given realformIdentifier,
-     * and returns a chloroform instance.
+     * Performs the "Form handling system A" routine.
      *
-     *
-     * The update mode is triggered if the ric strict columns are passed in the url (i.e. $_GET).
-     *
-     *
-     * What does this method do?
-     * ----------------
-     *
-     * It creates the form, using realform,
-     * it handles both the form insert and update actions.
-     *
-     * If the form is posted correctly, either:
-     *
-     * - an @page(iframe signal) is triggered (if defined in the options)
-     * - the posted data are handled using the on_success_handler (defined by the realform configuration),
-     *              and a success callback can also be triggered (if defined in the options).
-     *              That success callback (from the options) can return a http response to use directly.
-     *
-     *
-     *
-     *
-     * Errors and success messages are handled using the @page(flash service).
-     *
-     *
-     * Available options are:
-     *
-     * - multipliers: array of identifier => multiplierConf. Each multiplierConf item is an array representing the
-     *      multiplier conf, as defined in @page(the configuration file section of the Light_Realform conception notes),
-     *      but without the enabled property (which value is assumed true).
-     *
-     *
-     *
-     * Deprecated options...
-     * - iframeSignal; an @page(iframe signal) to use instead of the default success handler
-     * - onSuccess: a success callback to trigger when the form was successfully posted (in addition to the
-     *      success handler defined in the configuration). This applies only if the iframeSignal is not set
-     *
+     * https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/2020/conception-notes.md#form-handling-system-a
      *
      *
      *
@@ -565,29 +519,14 @@ class LightRealformService
          * of this class: LightRealformRoutineOne:
          *
          * - iframe signal concept: https://github.com/lingtalfi/TheBar/blob/master/discussions/iframe-signal.md
-         * - multiplier trick used in the table list field: https://github.com/lingtalfi/Light_ChloroformExtension/blob/master/doc/pages/conception-notes.md
          *
          * You might want to add them back when needed.
          */
         $ric = $nugget['ric'] ?? false;
         $storageId = $nugget['storage_id'];
-        $multipliers = $options['multipliers'] ?? [];
-        $multiplier = null;
-
-        /**
-         * Note: by definition we can only have one multiplier per form.
-         */
-        if ($multipliers) {
-            foreach ($multipliers as $fieldId => $multiItem) {
-                $multiItem['field_id'] = $fieldId;
-                $multiplier = $multiItem;
-                break;
-
-            }
-        }
-
-
+        $multiplier = $this->getMultiplierByNugget($nugget);
         $formId = $form->getFormId();
+
 
         //--------------------------------------------
         // INSERT/UPDATE SWITCH
@@ -644,13 +583,13 @@ class LightRealformService
             $form->addNotification(ErrorFormNotification::create($e->getMessage()));
         }
 
-
         //--------------------------------------------
         // FORM ALGORITHM
         //--------------------------------------------
         /**
          * @var $flasher LightFlasherService
          */
+        $data = null;
         $flasher = $this->container->get('flasher');
         if (true === $executeFormAlgo) {
 
@@ -731,22 +670,27 @@ class LightRealformService
                          *
                          */
 
-                        /**
-                         * Also, if it's an update, the ric params are in the $_GET (and in the url), and so if we were just
-                         * refreshing the page (which is what the redirect basically will do) we would have the old ric
-                         * parameters displayed in the form, which is not what we want: we want the refreshed form to
-                         * reflect the newest changes, including changes in the ric.
-                         * So, we just override the ric in $_GET, so that the new page refreshes with the new rics.
-                         */
                         $urlParams = $_GET;
                         $urlParams['t'] = time(); // make sure the browser will think it's a new page (t is reserved, this is indicated in our docs)
 
-                        if (true === $isUpdate) {
-                            foreach ($data as $k => $v) {
-                                if (in_array($k, $ric, true) && array_key_exists($k, $urlParams)) {
-                                    $urlParams[$k] = $v; // note: if you implement the form multiplier trick, you might need to change this, see my warning at the beginning of this method.
+
+                        /**
+                         * In update mode, if the ric changes, we update the url accordingly
+                         */
+                        if (true === $isUpdate && null !== $data) {
+                            foreach ($updateRic as $k => $v) {
+                                if (array_key_exists($k, $urlParams)) {
+
+                                    // do we override it?
+                                    if (array_key_exists($k, $data)) {
+                                        $newVal = $data[$k];
+                                        if ((string)$newVal !== (string)$v) {
+                                            $urlParams[$k] = $newVal;
+                                        }
+                                    }
                                 }
                             }
+
                         }
 
 
@@ -765,6 +709,7 @@ class LightRealformService
                             }
                         }
 
+
                         $flasher->addFlash($formId, $message);
                         $url = UriTool::getCurrentUrl();
                         $redirectUrl = UriTool::uri($url, $urlParams);
@@ -776,17 +721,20 @@ class LightRealformService
 //                $form->addNotification(ErrorFormNotification::create("There was a problem."));
                 }
             } else {
+
                 //--------------------------------------------
                 // DEFAULT VALUES
                 //--------------------------------------------
                 $feederOptions = [];
-                if ($multiplier) {
-                    $feederOptions['multiplier'] = $multiplier;
-                }
                 if (true === $isUpdate) {
                     $feederOptions['updateRic'] = $updateRic;
                 }
-                $this->injectDefaultValues($nugget, $form, $feederOptions);
+
+                try {
+                    $this->injectDefaultValues($nugget, $form, $feederOptions);
+                } catch (\Exception $e) {
+                    $form->addNotification(ErrorFormNotification::create($e->getMessage()));
+                }
 
 
                 if ($flasher->hasFlash($formId)) {
@@ -796,7 +744,6 @@ class LightRealformService
 
             }
         }
-
 
         return $form;
     }
@@ -857,25 +804,25 @@ class LightRealformService
             if (array_key_exists("multiplier", $options)) {
                 $successOptions["multiplier"] = $options['multiplier'];
             }
+
+
             $successHandler->execute($data, $successOptions);
         }
     }
 
 
     /**
-     * Injects the default values into the given form, based on the given nugget.
+     * Returns the default values from the feeder, based on the given nugget.
      *
      * Available options are:
      * - ?updateRic: array, the update ric (only if the form is in update mode)
-     * - multiplier: array, the multiplier. See more in @page(the configuration file section of the Light_Realform conception notes)
      *
      *
      * @param array $nugget
-     * @param Chloroform $form
      * @param array $options
      * @throws \Exception
      */
-    public function injectDefaultValues(array $nugget, Chloroform $form, array $options = [])
+    public function getFeederDefaultValues(array $nugget, array $options = []): array
     {
         $feeder = $nugget['feeder'] ?? null;
         if (false !== $feeder) {
@@ -901,15 +848,11 @@ class LightRealformService
             if (array_key_exists('updateRic', $options)) {
                 $feederParams['updateRic'] = $options['updateRic'];
             }
-            if (array_key_exists('multiplier', $options)) {
-                $feederParams['multiplier'] = $options['multiplier'];
-            }
 
-            $defaultValues = $feeder->getDefaultValues($feederParams);
-            $form->injectValues($defaultValues);
+            return $feeder->getDefaultValues($feederParams);
         }
+        return [];
     }
-
 
     //--------------------------------------------
     //
@@ -922,6 +865,46 @@ class LightRealformService
     private function error(string $msg)
     {
         throw new LightRealformException($msg);
+    }
+
+
+    /**
+     * Returns the multiplied column found in the given nugget, or null if no multiplier was found.
+     *
+     * @param array $nugget
+     * @return string|null
+     */
+    private function getMultiplierByNugget(array $nugget)
+    {
+        $ret = null;
+        $fields = $nugget['chloroform']['fields'] ?? [];
+        if ($fields) {
+            foreach ($fields as $id => $field) {
+                if (array_key_exists('multiplier', $field) && true === $field['multiplier']) {
+
+                    $ret = $id;
+                    break;
+                }
+            }
+        }
+        return $ret;
+    }
+
+    /**
+     * Injects the default values into the given form, based on the given nugget.
+     *
+     * Available options are the same as the getFeederDefaultValues method's options.
+     *
+     *
+     * @param array $nugget
+     * @param Chloroform $form
+     * @param array $options
+     * @throws \Exception
+     */
+    private function injectDefaultValues(array $nugget, Chloroform $form, array $options = [])
+    {
+        $defaultValues = $this->getFeederDefaultValues($nugget, $options);
+        $form->injectValues($defaultValues);
     }
 
 

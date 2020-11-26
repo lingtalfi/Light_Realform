@@ -3,6 +3,7 @@
 
 namespace Ling\Light_Realform\Feeder;
 
+use Ling\ArrayToString\ArrayToStringTool;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_Realform\Exception\LightRealformException;
@@ -57,8 +58,6 @@ class RealformDatabaseFeeder implements RealformFeederInterface, LightServiceCon
             $this->error("storage_id parameter is mandatory.");
         }
         $table = $params['storage_id'];
-        $multiplier = $params['multiplier'] ?? null;
-
 
         $ret = [];
         if (null !== $updateRic) {
@@ -70,41 +69,10 @@ class RealformDatabaseFeeder implements RealformFeederInterface, LightServiceCon
             $markers = [];
             SimplePdoWrapper::addWhereSubStmt($query, $markers, $updateRic);
             $row = $db->fetch($query, $markers);
-
-            if (false !== $row) {
-                $ret = $row;
+            if (false === $row) {
+                $this->error("The record with ric: " . ArrayToStringTool::toInlinePhpArray($updateRic) . " was not found. Maybe it has been deleted.");
             }
-
-            if (null !== $multiplier) {
-
-
-                $fieldIdentifier = $multiplier['field_id'];
-                $onUpdateFetchSql = $multiplier['on_update_fetch_sql'] ?? null;
-                $pivot = $multiplier['pivot'];
-
-                if (null !== $onUpdateFetchSql) {
-                    $this->error("Not implemented yet.");
-                    $rows = $db->fetchAll($onUpdateFetchSql, $markers, \PDO::FETCH_COLUMN);
-                } else {
-                    /**
-                     * abc.1
-                     */
-                    $query = "select $fieldIdentifier from $table";
-                    if (false === array_key_exists($pivot, $updateRic)) {
-                        $this->error("The updateRic doesn't contain the \"$pivot\" property.");
-                    }
-
-                    $markers = [];
-                    SimplePdoWrapper::addWhereSubStmt($query, $markers, Where::inst()->key($pivot)->equals($updateRic[$pivot]));
-                    $rows = $db->fetchAll($query, $markers, \PDO::FETCH_COLUMN);
-
-                }
-
-                $ret[$fieldIdentifier] = $rows;
-
-
-            }
-
+            $ret = $row;
 
         }
         return $ret;

@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2020-09-21
+2019-10-21 -> 2020-11-26
 
 
 
@@ -68,6 +68,11 @@ Related
 History Log
 =============
 
+- 2.0.4 -- 2020-11-26
+
+    - update service's injectDefaultValues method, now is private
+    - fix multiplier not working properly
+    
 - 2.0.3 -- 2020-09-21
 
     - add service's executeSuccessHandler and injectDefaultValues methods

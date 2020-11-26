@@ -35,6 +35,12 @@ class RealformResult
      */
     protected $redirectionUrl;
 
+    /**
+     * This property holds the nugget for this instance.
+     * @var array
+     */
+    protected $nugget;
+
 
     /**
      * Builds the RealformResult instance.
@@ -45,6 +51,7 @@ class RealformResult
         $this->validPostedData = [];
         $this->isSuccessful = false;
         $this->redirectionUrl = false;
+        $this->nugget = [];
     }
 
     /**
@@ -126,6 +133,28 @@ class RealformResult
     {
         $this->redirectionUrl = $redirectionUrl;
     }
+
+    /**
+     * Returns the nugget of this instance.
+     *
+     * @return array
+     */
+    public function getNugget(): array
+    {
+        return $this->nugget;
+    }
+
+    /**
+     * Sets the nugget.
+     *
+     * @param array $nugget
+     */
+    public function setNugget(array $nugget)
+    {
+        $this->nugget = $nugget;
+    }
+
+
 
 
 }
