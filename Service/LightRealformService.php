@@ -7,6 +7,7 @@ use Ling\Bat\ArrayTool;
 use Ling\Bat\SmartCodeTool;
 use Ling\Bat\StringTool;
 use Ling\Bat\UriTool;
+use Ling\Chloroform\Field\CheckboxField;
 use Ling\Chloroform\Field\CSRFField;
 use Ling\Chloroform\Field\DecorativeField;
 use Ling\Chloroform\Field\FieldInterface;
@@ -332,6 +333,13 @@ class LightRealformService
                 if (array_key_exists("items", $fieldConf)) {
                     $field->setItems($fieldConf['items']);
                 }
+                break;
+
+            case "bool":
+                $fieldConf['bool'] = true;
+                $field = new CheckboxField($fieldConf);
+                $items = $fieldConf["items"] ?? ["1" => '&nbsp;'];
+                $field->setItems($items);
                 break;
             case "csrf":
                 $field = new CSRFField($fieldConf);
