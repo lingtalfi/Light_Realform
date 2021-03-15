@@ -86,7 +86,7 @@ class LightRealformService
          * @var $nug LightNuggetService
          */
         $nug = $this->container->get("nugget");
-        return $nug->getNugget($nuggetId, "Light_Realform/form");
+        return $nug->getNugget($nuggetId, "Ling.Light_Realform/form");
     }
 
 
@@ -102,7 +102,7 @@ class LightRealformService
          * @var $nug LightNuggetService
          */
         $nug = $this->container->get("nugget");
-        return $nug->getNuggetDirective($nuggetDirectiveId, "Light_Realform/form");
+        return $nug->getNuggetDirective($nuggetDirectiveId, "Ling.Light_Realform/form");
     }
 
 
@@ -200,6 +200,7 @@ class LightRealformService
     {
 
         $realformResult = new RealformResult();
+
 
         $nugget = $this->getNugget($nuggetId);
         $realformResult->setNugget($nugget);
