@@ -23,7 +23,7 @@ protected [LightRealformService::handleFormSystemA](https://github.com/lingtalfi
 
 Performs the "Form handling system A" routine.
 
-https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/2020/conception-notes.md#form-handling-system-a
+https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes.md#form-handling-system-a
 
 
 

@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2021-03-15
+2019-10-21 -> 2021-03-22
 
 
 
@@ -34,7 +34,9 @@ Summary
 ===========
 - [Light_Realform api](https://github.com/lingtalfi/Light_Realform/blob/master/doc/api/Ling/Light_Realform.md) (generated with [DocTools](https://github.com/lingtalfi/DocTools))
 - Pages
-    - [Conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/2020/conception-notes.md)
+    - [Conception notes](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes.md)
+    - [events](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/events.md)
+    - [config example](https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/realform-config-example.md)
 
 - [Services](#services)
 - [Related](#related)
@@ -73,6 +75,10 @@ Related
 History Log
 =============
 
+- 2.0.11 -- 2021-03-22
+
+    - fix event names not being prefixed with galaxy
+  
 - 2.0.10 -- 2021-03-15
 
     - update planet to adapt Ling.Light:0.70.0

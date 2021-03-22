@@ -509,7 +509,7 @@ class LightRealformService
     /**
      * Performs the "Form handling system A" routine.
      *
-     * https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/2020/conception-notes.md#form-handling-system-a
+     * https://github.com/lingtalfi/Light_Realform/blob/master/doc/pages/conception-notes.md#form-handling-system-a
      *
      *
      *
@@ -653,7 +653,7 @@ class LightRealformService
                          * rather than the host plugin, because it would be more practical for plugins
                          * like Light_ExceptionHandler (which dispatching below is mainly intended to) to deal with.
                          */
-                        $events->dispatch("Light_RealGenerator.on_realform_exception_caught", $data);
+                        $events->dispatch("Ling.Light_RealGenerator.on_realform_exception_caught", $data);
                     }
 
 
