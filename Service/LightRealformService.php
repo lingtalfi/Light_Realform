@@ -20,6 +20,7 @@ use Ling\Chloroform\Validator\PasswordConfirmValidator;
 use Ling\Chloroform\Validator\PasswordValidator;
 use Ling\Chloroform\Validator\ValidatorInterface;
 use Ling\Light\Events\LightEvent;
+use Ling\Light\Helper\LightHelper;
 use Ling\Light\Http\HttpResponseInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerAwareInterface;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
@@ -779,13 +780,21 @@ class LightRealformService
 
 
         $successHandler = null;
-        if (array_key_exists('class', $successHandlerConf)) {
+        if (true === array_key_exists("len", $successHandlerConf)) {
+            $lenExpression = $successHandlerConf['len'];
+            $successHandler = LightHelper::executeMethod($lenExpression, $this->container);
+        }
+        elseif (array_key_exists('class', $successHandlerConf)) {
             $className = $successHandlerConf['class'];
             if ('defaultDbHandler' === $className) {
                 $successHandler = new ToDatabaseSuccessHandler();
             } else {
                 $successHandler = new $successHandlerConf['class'];
             }
+        }
+
+
+        if (null !== $successHandler) {
 
 
             if (false === $successHandler instanceof RealformSuccessHandlerInterface) {
@@ -797,10 +806,8 @@ class LightRealformService
             }
 
 
-        }
 
 
-        if (null !== $successHandler) {
             $successOptions = $successHandlerConf['params'] ?? [];
             $successOptions = array_merge($successOptions, [
                 "storageId" => $nugget['storage_id'] ?? null,

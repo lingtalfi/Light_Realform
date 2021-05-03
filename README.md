@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2021-03-22
+2019-10-21 -> 2021-03-29
 
 
 
@@ -75,6 +75,14 @@ Related
 History Log
 =============
 
+- 2.0.12 -- 2021-05-03
+
+    - Update dependencies to Ling.Light_Events (pushed by SubscribersUtil)
+
+-- 2.0.12 -- 2021-03-29
+
+    - update service->executeSuccessHandler, now accepts light execute notation  
+  
 - 2.0.11 -- 2021-03-22
 
     - fix event names not being prefixed with galaxy
