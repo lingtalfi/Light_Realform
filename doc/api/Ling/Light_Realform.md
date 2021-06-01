@@ -1,6 +1,6 @@
 Ling/Light_Realform
 ================
-2019-10-21 --> 2021-05-31
+2019-10-21 --> 2021-06-01
 
 
 
@@ -87,8 +87,11 @@ Table of contents
 Dependencies
 ============
 - [ArrayToString](https://github.com/lingtalfi/ArrayToString)
+- [ArrayVariableResolver](https://github.com/lingtalfi/ArrayVariableResolver)
+- [BabyYaml](https://github.com/lingtalfi/BabyYaml)
 - [Bat](https://github.com/lingtalfi/Bat)
 - [Chloroform](https://github.com/lingtalfi/Chloroform)
+- [ConventionTools](https://github.com/lingtalfi/ConventionTools)
 - [Light](https://github.com/lingtalfi/Light)
 - [Light_ChloroformExtension](https://github.com/lingtalfi/Light_ChloroformExtension)
 - [Light_Crud](https://github.com/lingtalfi/Light_Crud)

@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2021-03-29
+2019-10-21 -> 2021-06-01
 
 
 
@@ -75,6 +75,10 @@ Related
 History Log
 =============
 
+- 2.1.0 -- 2021-06-01
+
+    - Switch to open registration system instead of traditional nuggets
+  
 - 2.0.16 -- 2021-05-31
 
     - Removing trailing plus in lpi-deps file (to work with Light_PlanetInstaller:2.0.0 api
@@ -94,9 +98,6 @@ History Log
 - 2.0.12 -- 2021-05-03
 
     - Update dependencies to Ling.Light_Events (pushed by SubscribersUtil)
-
--- 2.0.12 -- 2021-03-29
-
     - update service->executeSuccessHandler, now accepts light execute notation  
   
 - 2.0.11 -- 2021-03-22
