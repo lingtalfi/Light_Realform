@@ -1,6 +1,6 @@
 Light_Realform
 ===========
-2019-10-21 -> 2021-06-01
+2019-10-21 -> 2021-06-03
 
 
 
@@ -75,6 +75,10 @@ Related
 History Log
 =============
 
+- 2.1.1 -- 2021-06-03
+
+    - add LightRealformConfigurationFileRegistrationHelper class
+  
 - 2.1.0 -- 2021-06-01
 
     - Switch to open registration system instead of traditional nuggets
