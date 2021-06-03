@@ -75,6 +75,10 @@ Related
 History Log
 =============
 
+- 2.1.2 -- 2021-06-03
+
+    - fix functional typo in LightRealformConfigurationFileRegistrationHelper namespace 
+
 - 2.1.1 -- 2021-06-03
 
     - add LightRealformConfigurationFileRegistrationHelper class
